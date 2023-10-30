@@ -16,7 +16,7 @@ The exercises cover (via different content delivery mechanisms like [MongoDB Com
 ## Table of Contents
 - **Preparation**
   - [Prerequisites](#prerequisites)
-  - [Workshop Facilitator Checklist / Limitations to be Aware Of](#workshop-facilitator-checklist--limitations-to-be-aware-of)
+  - [Workshop Facilitator Checklist](#workshop-facilitator-checklist)
   - [Troubleshooting Common Issues](#troubleshooting-common-issues)
 - **Execution**: Choose one of the following approaches to the exercises
   - [MongoDB Compass](https://github.com/nickgogan/MongoDBAtlasDeveloperDay/tree/main/compass)
@@ -50,7 +50,7 @@ The exercises cover (via different content delivery mechanisms like [MongoDB Com
 
 7. **Your are aready for the workshop!**
 
-## Workshop Facilitator Checklist / Limitations to be Aware Of
+## Workshop Facilitator Checklist
 1. **Visit the conference room in-person**: Ensure that you have everything you need to deliver the content for both the in-person and virtual attendees. For example:
    -   If the room is large, you may need a microphone. 
    -   Ensure connectivity to the right onsite network.
