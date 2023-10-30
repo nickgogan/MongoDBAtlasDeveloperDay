@@ -24,7 +24,7 @@ The exercises cover (via different content delivery mechanisms like [MongoDB Com
 - **Optional**
   - [Get your own clean wikipedia dataset](https://github.com/nickgogan/MongoDBAtlasDeveloperDay/tree/main/data)
 
-## Prerequisites
+## Attendee Prerequisites
 
 1. **Create a [MongoDB Atlas Account](https://www.mongodb.com/docs/atlas/)** using your corporate email via [the registration page](https://www.mongodb.com/cloud/atlas/register). This account is used **only for logging into the Atlas control plane/web UI, not for the actual database.** This flow will create your initial [Atlas Organization](https://www.mongodb.com/docs/atlas/access/orgs-create-view-edit-delete/) and [Project](https://www.mongodb.com/docs/atlas/tutorial/manage-projects/), i.e. the containers for your database clusters. 
    - **Note**: If your corporate email is already associated with an Atlas Organization and you do not have the ability to create new free-tier Atlas clusters, then please contact your local MongoDB account team for options.
@@ -50,34 +50,33 @@ The exercises cover (via different content delivery mechanisms like [MongoDB Com
 
 7. **Your are aready for the workshop!**
 
-## Workshop Facilitator Checklist
+## Workshop Facilitator Prerequisites
 1. **Visit the conference room in-person**: Ensure that you have everything you need to deliver the content for both the in-person and virtual attendees. For example:
    -   If the room is large, you may need a microphone. 
    -   Ensure connectivity to the right onsite network.
    -   HDMI, accessories, etc. 
 
-
 2. **Networking**: If doing the workshop at a company's site, be cognizant of any networking configuration (e.g. corporate firewall/VPN) that may block access to Atlas via Compass/Jupyter/web UI/etc. **Visit the office yourself and have 1+ participants that are typically onsite join a zoom/be in-person with you and run through all of the workshop exercises to ensure a smooth flow.**
     - **Corporate WiFi vs Guest network**: A guest network typically has fewer restrictions, but are not ideal in many cases. Work with the company's IT & Security team to ensure access via the Corporate WiFi/VPN/Firewall.
     - **IP Address access**: If participants completed the setup work at home and are attending in-person, they will have a new IP address to add to their Atlas Project's IP Access List. See [Trobuleshooting/Add IP Address to Access List](https://www.mongodb.com/docs/atlas/government/tutorial/allow-ip/).
 
-
-3. **Gather the full participants list**: Gather the (corporate) emails of all registrants and identify those who already have their corporate emails associated with an existing Atlas Organization. 
-    - Ensure that all participants have received prerequisites, the calendar invite, prerequisites, etc. as soon as those are fully nailed down. It's important to have an idea of how many people will actually show up & participate.
-    - For participants that are already part of an existing Atlas Organization via their corporate email address, find a way for them to provision their own free-tier/M0 cluster. This could be using a private/personal email address for just this workshop (include instructions to throw away the Atlas resources after the workshop is done) or using a single, dedicated Atlas cluster that is hosted by MongoDB for the workshop and which every attendee will use. 
-    - For participants that are part of existing Atlas Organizations AND whose Projects have an existing free-tier/M0 cluster, reach out to either create a separate Organization or separate Project. This is because [Atlas Projects can only have 1 free-tier cluster](https://www.mongodb.com/docs/atlas/reference/free-shared-limitations/#operational-limitations).
-  
-4. **Conferencing**: If the workshop will be streamed via Zoom/Teams/etc., then:
+3. **Conferencing**: If the workshop will be streamed via Zoom/Teams/etc., then:
    - **Ask to be the Zoom host**: Not being the host can lead to bottlenecks in allowing participants to join the call. 
    - **Ensure Chat functionality**: Do this for the facilitator and all helpers to be able to properly assist attendees in a timely manner.
-  
-5. **Designate teams**: Workshops seem to be more effective and fun when participants work in teams. Be careful about mixing in-person and virtual attendees together. Consider creating breakout rooms for virtual attendees, with a helper faciliating each room. 
+
+3. **Gather the full participants list**: Gather the (corporate) emails of all registrants and identify those who already have their corporate emails associated with an existing Atlas Organization. 
+    - **Ensure attendee prerequisites are shared**: All participants have received prerequisites, the calendar invite, etc. as soon as those are fully nailed down. It's important to have an idea of how many people will actually show up & participate, and the calendar invite tells you this.
+    - **Ensure each attendee has their Atlas account**: For participants that are already part of an existing Atlas Organization via their corporate email address, find another way for them to provision their own free-tier/M0 cluster. This could be using a private/personal email address for just this workshop (include instructions to throw away the Atlas resources after the workshop is done) or using a single, dedicated Atlas cluster that is hosted by MongoDB for the workshop and which every attendee will use. 
+      - For participants that are part of existing Atlas Organizations AND whose Projects have an existing free-tier/M0 cluster, reach out to either create a separate Organization or separate Project. This is because [Atlas Projects can only have 1 free-tier cluster](https://www.mongodb.com/docs/atlas/reference/free-shared-limitations/#operational-limitations).
+    - **Designate teams**: Workshops seem to be more effective and fun when participants work in teams. Be careful about mixing in-person and virtual attendees together. Consider creating breakout rooms for virtual attendees, with a helper faciliating each room. 
    
-6. **Bring enough support**: Ensure a ratio of roughly 1 helper/10 attendees.
+4. **Bring enough support**: Ensure a ratio of roughly 1 helper/10 attendees.
 
-7. **Ensure ability to install software locally (if using Compass/the like)**: Not all employees are able to install software like Compass locally. If going with a route like this, make sure 1+ attendees run through the prerequisites and workshop content live with you, in the same setting as the workshop will be held in. 
+5. **Content sharing & local software installation**: Not all employees are able to install software like Compass locally or get to datasets online. If you are going to require content such as dataset files (e.g. the `data/wikipedia_tiny.json`), make sure 1+ attendees run through the prerequisites and workshop content live with you, in the same setting as the workshop will be held in. 
+   - Ensure ability to install software locally (if using Compass/the like).
+   - Ensure there is an effective, secure, and mutually-approved way for sharing content like installation files and datasets. For example, the workshop sponsor could work internally to provide a secure S3 bucket or a NAS file system path that participants can access before or during the workshop. 
 
-8. **If sharing larger files/content, ensure you have a secure, approved means of doing so**: Work with your workshop sponsors to set up a secure S3 bucket, NAS storage, etc. for participants to connect to either before or during the workshop.
+6. **For vector search, compute your vectorized query ahead of time and share in a easy-to-copy way**.
 
 ## Troubleshooting Common Issues
 1. **Add IP Address to Access List**: MongoDB Atlas clusters only allow connections from known IP addresses. These addresses may change for a variety of reasons, from corporate IT policy rolling them on a regular basis to working on different networks (e.g. home vs corporate network/VPN). To add a new IP address to your Project's Access List via the [Atlas web GUI](https://cloud.mongodb.com/account/login):
