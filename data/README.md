@@ -1,3 +1,35 @@
+# Table of Contents
+
+- [Table of Contents](#table-of-contents)
+- [Vectorize Query](#vectorize-query)
+- [Get your own clean wikipedia dataset](#get-your-own-clean-wikipedia-dataset)
+
+# Vectorize Query
+
+1. Set up your python environment (if not done already):
+
+```
+python3 -m venv .ENV
+```
+
+```
+source .ENV/bin/activate
+```
+
+```
+pip install -r requirements.txt
+```
+
+2. Open a terminal session where you activated your ENV. 
+
+3. Start python interpreter: ```python3```
+
+4. Import HuggingFace transformers library: ```from sentence_transformers import SentenceTransformer```
+
+5. Get handle on the ```all-MiniLM-L6-v2``` model: ```encoder = SentenceTransformer('sentence-transformers/all-MiniLM-L6-v2')```
+
+6. Encode query text into vector representation: ```encoder.encode(<yourquery>).tolist()```
+
 # Get your own clean wikipedia dataset
 
 All code is contained within `main.py` and requirements within `requirements.txt`. The latter was produced using `pip freeze > requirements.txt`. All configuration for `main.py` is located immediately within the `main()` function near the top of the file, with comments indicated what to change. **The main requirement is to replace the `mongo_uri` variable with your [cluster's connection string](https://www.mongodb.com/docs/guides/atlas/connection-string/).**
@@ -9,7 +41,7 @@ The defaults of `main.py` are:
 
 To run the script yourself and generate a different dataset: 
 
-1. Set up your python environment:
+1. Set up your python environment (if not done already):
 
 ```
 python3 -m venv .ENV
