@@ -2,7 +2,7 @@
 - **Last Updated:** October 30th, 2023
 - **Owner:** [Nick Gogan](nick.gogan@mongodb.com) (feel free to reach out!)
 
-This hands-on workshop is meant to introduce developers new to MongoDB and MongoDB Atlas to how the data platform works. It was originally designed to be delivered in-person at a company's corporate office, using slides to facilitate the discussion before each exercise. Both physical and virtual attendees are expected to join a conference call to easily see this content. The slide deck is internal to MongoDB and only accessible as a static PDF in this repo. 
+This hands-on workshop is meant to introduce developers new to MongoDB and MongoDB Atlas to how the data platform works. It was originally designed to be delivered in-person at a company's corporate office, using slides to facilitate the discussion before each exercise. Both physical and virtual attendees are expected to join a conference call to easily see this content. The slide deck is internal to MongoDB and only accessible as a static PDF in this repo. Some of the slides are embedded GIFs that will look off when viewed as a PDF - that is normal & expected! Those slides demonstrate how to navigate an interface or input a specific command, both of which are available as plaintext in the README of whatever content delivery method you choose (Compass/Shell, Jupyter notebook, etc.). Note that any link in the slides should be clickable when the PDF is opened locally. 
 
 Ideally, the workshop participants have already seen a MongoDB Atlas 101 presentation to get introduced to the core concepts of the platform in theory before doing this practice.
 
