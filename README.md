@@ -76,7 +76,7 @@ The exercises cover (via different content delivery mechanisms like [MongoDB Com
    - Ensure ability to install software locally (if using Compass/the like).
    - Ensure there is an effective, secure, and mutually-approved way for sharing content like installation files and datasets. For example, the workshop sponsor could work internally to provide a secure S3 bucket or a NAS file system path that participants can access before or during the workshop. 
 
-6. **For vector search, compute your vectorized query ahead of time and share in a easy-to-copy way**. See how [here]()
+6. **For vector search, compute your vectorized query ahead of time and share in a easy-to-copy way**. See how [here](https://github.com/nickgogan/MongoDBAtlasDeveloperDay/tree/main/data#vectorize-query)
 
 ## Troubleshooting Common Issues
 1. **Add IP Address to Access List**: MongoDB Atlas clusters only allow connections from known IP addresses. These addresses may change for a variety of reasons, from corporate IT policy rolling them on a regular basis to working on different networks (e.g. home vs corporate network/VPN). To add a new IP address to your Project's Access List via the [Atlas web GUI](https://cloud.mongodb.com/account/login):

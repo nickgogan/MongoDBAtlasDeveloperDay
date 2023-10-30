@@ -1,5 +1,4 @@
 # Table of Contents
-
 - [Table of Contents](#table-of-contents)
 - [Vectorize Query](#vectorize-query)
 - [Get your own clean wikipedia dataset](#get-your-own-clean-wikipedia-dataset)
