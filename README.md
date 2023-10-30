@@ -77,6 +77,8 @@ The exercises cover (via different content delivery mechanisms like [MongoDB Com
 
 7. **Ensure ability to install software locally (if using Compass/the like)**: Not all employees are able to install software like Compass locally. If going with a route like this, make sure 1+ attendees run through the prerequisites and workshop content live with you, in the same setting as the workshop will be held in. 
 
+8. **If sharing larger files/content, ensure you have a secure, approved means of doing so**: Work with your workshop sponsors to set up a secure S3 bucket, NAS storage, etc. for participants to connect to either before or during the workshop.
+
 ## Troubleshooting Common Issues
 1. **Add IP Address to Access List**: MongoDB Atlas clusters only allow connections from known IP addresses. These addresses may change for a variety of reasons, from corporate IT policy rolling them on a regular basis to working on different networks (e.g. home vs corporate network/VPN). To add a new IP address to your Project's Access List via the [Atlas web GUI](https://cloud.mongodb.com/account/login):
     - Log in.
