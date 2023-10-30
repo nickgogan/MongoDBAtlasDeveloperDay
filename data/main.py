@@ -1,7 +1,7 @@
 # Author: Nick Gogan (gogannick@gmail.com)
 # Date: October 30 2023
 # This is for reference/demo/workshop purposes only and is not meant to be production ready code.
-# There are no warranties associated with this code.
+# There are no warranties or guarantees associated with this code.
 
 from datasets import load_dataset
 from sentence_transformers import SentenceTransformer
@@ -23,6 +23,9 @@ class IndexBy(ExtendedEnum):
     RECORDS = 'RECORDS'
 
 def main():
+    mongo_uri = 'mongodb+srv://<username>:<password>@<clustername>.<projecthash>.mongodb.net/?retryWrites=true' #CHANGEME
+    mongo_insert_batch_size = 1_000
+    mongo_reset_collection = False #This assumes there is either an empty DevDay.wikipedia collection or this collection does not exist when running this script.
     index_by = IndexBy.ALL
     embedding_model_name = 'sentence-transformers/all-MiniLM-L6-v2' # 384 dimensions
     dataset_path = 'wikipedia'
@@ -30,13 +33,10 @@ def main():
     dataset_name = '20220301.en' #CHANGEME #https://huggingface.co/datasets/wikipedia
     dataset_language = 'english' #CHANGEME
     dataset_date = '20220301' #CHANGEME
-    data_total_volume_in_bytes = 1.1e+7 #10MB #1.1e+9 #1GB #1.1e+10 #10GB
-    data_total_record_count = 200 # 1_000_000
-    mongo_uri = 'mongodb+srv://<username>:<password>@<clustername>.<projecthash>.mongodb.net/?retryWrites=true'
+    data_total_volume_in_bytes = 1.1e+7 #1.1e7 is 10MB, 1.1e+9 is 1GB, 1.1e+10 is 10GB...
+    data_total_record_count = 1_000_000
     mongo_dbname = 'DevDay'
     mongo_collname = 'wikipedia'
-    mongo_insert_batch_size = 1000
-    mongo_reset_collection = False
 
     dataset = iter(load_dataset(dataset_path, dataset_name, split='train', streaming=True))
     encoder = SentenceTransformer(embedding_model_name)

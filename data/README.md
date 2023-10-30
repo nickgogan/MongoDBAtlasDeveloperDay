@@ -1,6 +1,13 @@
 # Get your own clean wikipedia dataset
 
-All code is contained within `main.py` and requirements within `requirements.txt`. The latter was produced using `pip freeze > requirements.txt`.
+All code is contained within `main.py` and requirements within `requirements.txt`. The latter was produced using `pip freeze > requirements.txt`. All configuration for `main.py` is located immediately within the `main()` function near the top of the file, with comments indicated what to change. **The main requirement is to replace the `mongo_uri` variable with your [cluster's connection string](https://www.mongodb.com/docs/guides/atlas/connection-string/).**
+
+The defaults of `main.py` are:
+    - Indexing all of the clean, English language wikipedia dataset from [HuggingFace](https://huggingface.co/datasets/wikipedia). This amounts to **~16.18GB of raw data**. The python file also includes options to index by a given max bytes or max record count. Other languages are available, just visit the HuggingFace dataset link.
+    - The `all-MiniLM-L6-v2` embedding model is used to vectorize the body of the each wikipedia entry. This also comes from HuggingFace and has 384 dimensions. 
+    - All content is shaped into a JSON document and is inserted into the target Atlas cluster **concurrently** in batches of `1000` documents.
+
+To run the script yourself and generate a different dataset: 
 
 1. Set up your python environment:
 
@@ -16,4 +23,9 @@ source .ENV/bin/activate
 pip install -r requirements.txt
 ```
 
+2. Update the `mongo_uri` variable with your connection string. 
 
+3. Run the script:
+```
+python3 main.py
+```
