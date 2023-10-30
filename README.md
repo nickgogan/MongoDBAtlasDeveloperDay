@@ -63,7 +63,9 @@ The exercises cover (via different content delivery mechanisms like [MongoDB Com
 
 
 3. **Gather the full participants list**: Gather the (corporate) emails of all registrants and identify those who already have their corporate emails associated with an existing Atlas Organization. 
-    - Ensure that all participants have received prerequisites, the calendar invite, prerequisites, etc. as soon as those are fully nailed down. It's important to have an idea of how many people will actually show up & participate.   
+    - Ensure that all participants have received prerequisites, the calendar invite, prerequisites, etc. as soon as those are fully nailed down. It's important to have an idea of how many people will actually show up & participate.
+    - For participants that are already part of an existing Atlas Organization via their corporate email address, find a way for them to provision their own free-tier/M0 cluster. This could be using a private/personal email address for just this workshop (include instructions to throw away the Atlas resources after the workshop is done) or using a single, dedicated Atlas cluster that is hosted by MongoDB for the workshop and which every attendee will use. 
+    - For participants that are part of existing Atlas Organizations AND whose Projects have an existing free-tier/M0 cluster, reach out to either create a separate Organization or separate Project. This is because [Atlas Projects can only have 1 free-tier cluster](https://www.mongodb.com/docs/atlas/reference/free-shared-limitations/#operational-limitations).
   
 4. **Conferencing**: If the workshop will be streamed via Zoom/Teams/etc., then:
    - **Ask to be the Zoom host**: Not being the host can lead to bottlenecks in allowing participants to join the call. 
@@ -76,9 +78,7 @@ The exercises cover (via different content delivery mechanisms like [MongoDB Com
 7. **Ensure ability to install software locally (if using Compass/the like)**: Not all employees are able to install software like Compass locally. If going with a route like this, make sure 1+ attendees run through the prerequisites and workshop content live with you, in the same setting as the workshop will be held in. 
 
 ## Troubleshooting Common Issues
-1. **Corporate email already in use**: If an Atlas
-
-2. **Add IP Address to Access List**: MongoDB Atlas clusters only allow connections from known IP addresses. These addresses may change for a variety of reasons, from corporate IT policy rolling them on a regular basis to working on different networks (e.g. home vs corporate network/VPN). To add a new IP address to your Project's Access List via the [Atlas web GUI](https://cloud.mongodb.com/account/login):
+1. **Add IP Address to Access List**: MongoDB Atlas clusters only allow connections from known IP addresses. These addresses may change for a variety of reasons, from corporate IT policy rolling them on a regular basis to working on different networks (e.g. home vs corporate network/VPN). To add a new IP address to your Project's Access List via the [Atlas web GUI](https://cloud.mongodb.com/account/login):
     - Log in.
     - Go to "Network Access" on the left-hand panel.
     - Hit the "Add IP Address" button.
@@ -87,3 +87,8 @@ The exercises cover (via different content delivery mechanisms like [MongoDB Com
     - Optionally, make the entry temporary (6hrs to 1 week).
     - Allow a few moments for Atlas automation to make the change.
     - Try logging into your cluster using your db user (not your Atlas UI credentials).
+
+2. **Use of VPN**: If attendees MUST be on the VPN, even while in-person, you cannot use the free/shared-tier M0 cluster because a PrivateLink connection must be set up to allow transitive peering for attendees connecting to Atlas via VPN. Transitive peering is necessary in this case and the only way to set this up is by provisioning a paid Atlas cluster and a PrivateLink connection between your customer's network and MongoDB Atlas. 
+   - Paid clusters require that some form of billing be configured in the given Atlas Organization.
+
+3. **[Note the free-tier cluster limitations](https://www.mongodb.com/docs/atlas/reference/free-shared-limitations)**
