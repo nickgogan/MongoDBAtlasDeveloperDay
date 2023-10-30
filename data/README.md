@@ -4,9 +4,7 @@ All code is contained within `main.py` and requirements within `requirements.txt
 
 1. Set up your python environment:
 
-```
-python3 -m venv .ENV
-```
+```python3 -m venv .ENV```
 
 `source .ENV/bin/activate`
 
