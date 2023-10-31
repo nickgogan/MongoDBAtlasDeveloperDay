@@ -133,18 +133,44 @@ Note that the latter command (`find()`), by default, returns a cursor (iterable 
 
 [ne](https://www.mongodb.com/docs/manual/reference/operator/query/ne/) - Not equals.
 
-[not](https://www.mongodb.com/docs/manual/reference/operator/query/not/): Inverses the logic of a query
+[not](https://www.mongodb.com/docs/manual/reference/operator/query/not/): Inverses the logic of whatever queries follows it.
 
-$or: Boolean OR
-$and: Boolean AND. Usually used for specific nesting situations
-$exists: Filters based on field existence
-$type: Filters based on BSON type
-$elemMatch: Query on objects within arrays
+[or](https://www.mongodb.com/docs/manual/reference/operator/query/or/): Boolean OR.
+
+[and](https://www.mongodb.com/docs/manual/reference/operator/query/and/): Boolean AND, usually used for specific nesting situations.
+
+[exists](https://www.mongodb.com/docs/manual/reference/operator/query/exists/): Filters based on the existence of a given field. Note that a field with value `NULL` counts as existing! Personally, I can recall being `NULL` a couple of times in my life. 
+
+[type](https://www.mongodb.com/docs/manual/reference/operator/query/type/): Filters based on [BSON type](https://www.mongodb.com/docs/manual/reference/bson-types/).
+
+[elemMatch](https://www.mongodb.com/docs/manual/reference/operator/query/elemMatch/): Query on objects in arrays.
 
 #### Setup
 Before proceeding to the exercise, switch to using the `sample_mflix` database's `movies` collection. If following using the shell, use the `use` keyword ([Reference](https://www.mongodb.com/docs/compass/current/embedded-shell/#use-the-embedded-mongodb-shell)).
 > Notice how the Compass shell provides suggestions (i.e. intellisense)!
 
+#### Exercise
+1. Find 1 movie with the title “Blacksmith Scene”.
+2. Find movies released in 1991 with Brad Pitt.
+3. Find all movies released after 1991.
+4. Find all records where the runtime fields does not exist.
+5. Find all movies where the Rotten Tomatoes rating is greater than 3.4.
+
+[Example of how to query via the Compass GUI](https://www.mongodb.com/docs/compass/current/documents/view/).
+
+### Exercise 6: Sort, Limit, Skip, Project
+
+Below doubles as both example shell syntax as well as a short explanation of what the operators do. Don't worry Compass GUI fans, just hit the `Options` button as show in the screenshot below to get the same options:
+![open Compass query options](https://github.com/nickgogan/MongoDBAtlasDeveloperDay/blob/main/compass/images/Compass_QueryOptions.png)
 
 
+`db.<collectionName>.find({filter})`: Returns a cursor (iterable pointer to many documents). [Compass GUI example](https://www.mongodb.com/docs/compass/current/query/filter/#set-query-filter).
+
+`db.<collectionName>.find({filter},{projection})`: Returns only the specified fields. Example: `db.movies.find({title: “Regeneration”}, {_id: 0, title: 1, fullplot: 1})`. [Compass GUI example](https://www.mongodb.com/docs/compass/current/query/project/).
+
+`db.<collectionName>.find({filter},{projection})`.sort([{‘<fieldName>’:<1|-1>}])
+
+db.<collectionName>.find({filter},{projection}).skip(<int>)
+
+db.<collectionName>.find({filter},{projection}).skip().limit(<int>)
 
