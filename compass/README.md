@@ -41,7 +41,7 @@ Most of the remaining exercises can be completed via either the Compass GUI or v
 ```
 [Example via Compass GUI](https://www.mongodb.com/docs/compass/current/documents/insert/)
 
-Shell syntax:
+Shell syntax (`{options}` is optional and not needed for this exercise):
 
 ```
 db.<collectionName>.insertOne({key:value},{options})
