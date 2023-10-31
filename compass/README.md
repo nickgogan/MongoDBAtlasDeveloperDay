@@ -42,6 +42,7 @@ Most of the remaining exercises can be completed via either the Compass GUI or v
 [Example via Compass GUI](https://www.mongodb.com/docs/compass/current/documents/insert/)
 
 Shell syntax:
+
 ```db.<collectionName>.insertOne({key:value},{options})```
 
 ```db.<collectionName>.insertMany([{k:v},{k:v}],{options})```
