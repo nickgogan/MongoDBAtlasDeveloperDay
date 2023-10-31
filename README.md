@@ -15,8 +15,8 @@ The exercises cover (via different content delivery mechanisms like [MongoDB Com
 
 ## Table of Contents
 - **Preparation**
-  - [Prerequisites](#prerequisites)
-  - [Workshop Facilitator Checklist](#workshop-facilitator-checklist)
+  - [Prerequisites](#attendee-prerequisites)
+  - [Workshop Facilitator Checklist](#workshop-facilitator-prerequisites)
   - [Troubleshooting Common Issues](#troubleshooting-common-issues)
 - **Execution**: Choose one of the following approaches to the exercises
   - [MongoDB Compass](https://github.com/nickgogan/MongoDBAtlasDeveloperDay/tree/main/compass)
