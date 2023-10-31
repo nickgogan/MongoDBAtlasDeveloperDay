@@ -43,9 +43,13 @@ Most of the remaining exercises can be completed via either the Compass GUI or v
 
 Shell syntax:
 
-```db.<collectionName>.insertOne({key:value},{options})```
+```
+db.<collectionName>.insertOne({key:value},{options})
+```
 
-```db.<collectionName>.insertMany([{k:v},{k:v}],{options})```
+```
+db.<collectionName>.insertMany([{k:v},{k:v}],{options})
+```
 
 
 
