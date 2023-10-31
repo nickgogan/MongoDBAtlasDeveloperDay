@@ -116,7 +116,32 @@ Now, drop (i.e. delete) `mydb` using the [Compass GUI](https://www.mongodb.com/d
 
 
 ### Exercise 5: Read operations (i.e. queries)
+#### Shell syntax
+```bash
+db.<collectionName>.findOne({filter},{projection}) 
+```
+```bash
+db.<collectionName>.find({filter},{projection})
+```
+Note that the latter command (`find()`), by default, returns a cursor (iterable pointer) to the documents matching the query. In the shell, you can append a `toArray()` after the `find()` to get all results at once. 
+#### Useful operators
+[eq (equals)](https://www.mongodb.com/docs/manual/reference/operator/query/eq/) - Similar to a normal query
 
+[gt](https://www.mongodb.com/docs/manual/reference/operator/query/gt/)/[gte](https://www.mongodb.com/docs/manual/reference/operator/query/gte/)/[lt](https://www.mongodb.com/docs/manual/reference/operator/query/lt/)/[lte](https://www.mongodb.com/docs/manual/reference/operator/query/lte/) - Greater [and equal] / less than [and equal]: Important operators for range queries.
+
+[in:[]](https://www.mongodb.com/docs/manual/reference/operator/query/in/) / [nin:[]](https://www.mongodb.com/docs/manual/reference/operator/query/nin/) (in / not in): Multiple value equality match
+
+[ne](https://www.mongodb.com/docs/manual/reference/operator/query/ne/) - Not equals.
+
+[not](https://www.mongodb.com/docs/manual/reference/operator/query/not/): Inverses the logic of a query
+
+$or: Boolean OR
+$and: Boolean AND. Usually used for specific nesting situations
+$exists: Filters based on field existence
+$type: Filters based on BSON type
+$elemMatch: Query on objects within arrays
+
+#### Setup
 Before proceeding to the exercise, switch to using the `sample_mflix` database's `movies` collection. If following using the shell, use the `use` keyword ([Reference](https://www.mongodb.com/docs/compass/current/embedded-shell/#use-the-embedded-mongodb-shell)).
 > Notice how the Compass shell provides suggestions (i.e. intellisense)!
 
