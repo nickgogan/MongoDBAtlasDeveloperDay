@@ -286,6 +286,106 @@ Once the index is ready, go back to Compass. Select the `wikipedia` collection a
 }
 ```
 
+Play around with search queries, using [this documentation root](https://www.mongodb.com/docs/atlas/atlas-search/searching/) as a guide and the examples below.
+
+[Fuzzy search/typo tolerance](https://www.mongodb.com/docs/atlas/atlas-search/text/):
+```
+$search = {
+  index: '<indexName>',
+  text: {
+	  query: ‘<queryText>’,
+	  path: '<indexedFieldName(s)>',
+	  fuzzy: {
+  	  maxEdits: 2,
+  	  prefixLength: 0
+	  }
+  }
+}
+```
+[Highlighting](https://www.mongodb.com/docs/atlas/atlas-search/highlighting/):
+```
+{
+  index: '<indexName>',
+  text: {
+	  query: ‘<queryText>’,
+	  path: '<indexedFieldName(s)>',
+	  fuzzy: {
+  	  maxEdits: 2,
+  	  prefixLength: 0
+	  }
+  },
+  highlight: {
+	  path: "<indexedFieldName>"
+  }
+}
+```
+[Compound search](https://www.mongodb.com/docs/atlas/atlas-search/compound/#definition):
+```
+{
+  index: "<indexName",
+  compound: {
+    should: {
+      text: {
+        path: "fullplot",
+        query: "werewolves",
+        fuzzy: {
+          maxEdits: 2,
+        },
+      },
+    },
+    mustNot: {
+      text: {
+        path: "fullplot",
+        query: "vampires",
+      },
+    },
+  },
+}
+```
+To see the `relevancy score` and `highlights`, add a subsequent `$project` stage to the pipeline:
+```
+score: {
+    $meta: "searchScore",
+  },
+  highlights: {
+    $meta: "searchHighlights",
+  },
+```
+Here is a full aggregation pipeline that can be run via the embedded shell:
+```bash
+let pipeline = [
+  {
+    $search: {
+      index: "optimized",
+      text: {
+        query: "test",
+        path: "text",
+      },
+    },
+  },
+  {
+    $project:
+      /**
+       * specifications: The fields to
+       *   include or exclude.
+       */
+      {
+        title: 1,
+        text: 1,
+        score: {
+          $meta: "searchScore",
+        },
+        highlights: {
+          $meta: "searchHighlights",
+        },
+      },
+  },
+]
+```
+then:
+```bash
+db.wikipedia.aggregate(pipeline)
+```
 
 ### **Exercise 11**: Create an *Optimized* Atlas Search Index
 #### Explanation
