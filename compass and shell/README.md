@@ -71,6 +71,7 @@ MongoDB is a document database, which means that it lets you nest objects in the
 > Fun fact: The shell is actually a javascript interpreter! This means you can do fun stuff like declare variables and loop through records directly in the shell, using modern javascript syntax. 
 ---
 
+#### Exercise
 Update your document to change John Doe's `lastName` to `Bo` and include the following additional address (John's been doing well for himself!):
 ```JSON
 { 
@@ -83,25 +84,25 @@ Update your document to change John Doe's `lastName` to `Bo` and include the fol
 }
 ```
 Use the following query operators as reference (you won't need all of them for this exercise):
-1. [set](https://www.mongodb.com/docs/manual/reference/operator/update/set/) - adds / updates fields.
-2. [unset](https://www.mongodb.com/docs/manual/reference/operator/update/unset/) - Removes fields.
-3. [inc](https://www.mongodb.com/docs/manual/reference/operator/update/inc/) - increments a field.
-4. [pull](https://www.mongodb.com/docs/manual/reference/operator/update/pull/) / [push](https://www.mongodb.com/docs/manual/reference/operator/update/push/) - Removes or inserts into an array.
-5. [convert](https://www.mongodb.com/docs/manual/reference/operator/aggregation/convert/) - Converts between data types.
+- [set](https://www.mongodb.com/docs/manual/reference/operator/update/set/) - adds / updates fields.
+- [unset](https://www.mongodb.com/docs/manual/reference/operator/update/unset/) - Removes fields.
+- [inc](https://www.mongodb.com/docs/manual/reference/operator/update/inc/) - increments a field.
+- [pull](https://www.mongodb.com/docs/manual/reference/operator/update/pull/) / [push](https://www.mongodb.com/docs/manual/reference/operator/update/push/) - Removes or inserts into an array.
+- [convert](https://www.mongodb.com/docs/manual/reference/operator/aggregation/convert/) - Converts between data types.
 
 ### **Exercise 3**: Delete operations
+##
 References:
 - [Compass GUI](https://www.mongodb.com/docs/compass/current/documents/delete/):
-- Shell syntax:
+- Shell syntax (`{options}` is optional and not needed for this exercise):
 ```bash
 db.<collectionName>.deleteOne({filter},{options})
 ```
 ```bash
 db.<collectionName>.deleteMany({filter},{options})
 ```
-`{filter}` - Which document(s) to delete (i.e. where-clause).
-
-`{options}` - Options include things like [write concern](https://www.mongodb.com/docs/manual/reference/write-concern/) (a mongoDB parameter for durability / performance tradeoffs) collation (for language support) and hint (index hinting).
+- `{filter}` - Which document(s) to delete (i.e. where-clause).
+- `{options}` - Options include things like [write concern](https://www.mongodb.com/docs/manual/reference/write-concern/) (a mongoDB parameter for durability / performance tradeoffs) collation (for language support) and hint (index hinting).
 
 ### **Exercise 4**
 Now, drop (i.e. delete) `mydb` using the [Compass GUI](https://www.mongodb.com/docs/compass/current/databases/#drop-a-database).
