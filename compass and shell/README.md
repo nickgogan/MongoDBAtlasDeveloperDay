@@ -386,6 +386,7 @@ then:
 ```bash
 db.wikipedia.aggregate(pipeline)
 ```
+>Fun fact: The pipeline above was [exported directly out of Compass](https://www.mongodb.com/docs/compass/current/agg-pipeline-builder/export-pipeline-results/) after I built & validated it via the GUI!
 
 ### **Exercise 11**: Create an *Optimized* Atlas Search Index
 #### Explanation
@@ -409,8 +410,46 @@ Since this index is scoped to a subset of the fields, it should build a little f
 ![optimized vs default index size difference](https://github.com/nickgogan/MongoDBAtlasDeveloperDay/blob/main/compass%20and%20shell/images/Atlas_SearchIndexSizeComparison.png)
 ### **Exercise 12**: Semantic Search
 #### Explanation
+You can perform semantic search on data in your Atlas cluster running MongoDB v6.0.11 or later using Atlas Vector Search. You can store vector embeddings for any kind of data along with other data in your collection on the Atlas cluster. Atlas Vector Search supports embeddings that are less than and equal to 2048 dimensions in width.
 
+When you define an Atlas Vector Search index on your collection, you can seamlessly index vector data along with your other data and then perform semantic search against the indexed fields.
+
+Atlas Vector Search uses the [Hierarchical Navigable Small Worlds](https://arxiv.org/abs/1603.09320) algorithm to perform the semantic search. You can use Atlas Vector Search support for approximate nearest neighbord (aNN) queries to search for results similar to a selected product, search for images, etc.
 #### Exercise
+Let's create a search index using the embeddings already available for the `wikipedia` collection's docs. 
+
+1. Back in the **Atlas web UI**, go to the **Search** page. There is a link called `Search` on the left-hand panel.
+2. Select your cluster and hit the `Go to Atlas Search` button. You should see the search index you previously made here. 
+3. Hit the `CREATE INDEX` button in the upper-right-hand side.
+4. This time, select `JSON Editor` and hit `Next`.
+5. Name this index `vector` and replace the default definition with this one:
+```JSON
+{
+  "mappings": {
+    "dynamic": false,
+    "fields": {
+      "language": [{
+        "type": "token",          
+        "normalizer": "lowercase"
+        },
+        {
+          "type": "string"
+        }
+      ],
+      "vector": {
+        "dimensions": 384,
+        "similarity": "cosine",
+        "type": "knnVector"
+      }
+    }
+  }
+}
+```
+6. Select the `devday` database's `wikipedia` collection to build this index on and hit `Next`.
+7. Hit `Create Search Index`.
+It should take only a couple of minutes for this index to be created and reach `ACTIVE` status, meaning that it is searchable.
+
+Once ready, 
 
 ### **Exercise 13**: Semantic Search with Pre-Filter
 #### Explanation
