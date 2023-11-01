@@ -252,7 +252,30 @@ Within this repo's `data/` folder, you will find a [`wikipedia_tiny.json`](https
 #### Exercise
 Create a new collection with database name `devday` and collection name `wikipedia`. Then, import the `wikipedia_tiny.json` tile into it. 
 [Please refer to this guide on how to import data files using the Compass GUI](https://www.mongodb.com/docs/compass/current/import-export/#import-data-into-a-collection)
+### **Exercise 10**: Create an Atlas Search Index
+#### Explanation
+[Atlas Search](https://www.mongodb.com/docs/atlas/atlas-search/) is an embedded full-text search capability in MongoDB Atlas that gives you a seamless, scalable experience for building relevance-based app features. Built on Apache Lucene, Atlas Search eliminates the need to run a separate search system alongside your database.
 
+In short, fulltext search queries typically deliver a wider range of records than regular database queries, and those records are returned sorted by `relevancy`. This means that top answers to those queries are computed to be more meaningful to the user. This is in opposition to database queries, where each record in the result set has equal weight to any other in the result set. 
 
+Moreover, fulltext search also delivers capabilities such as typo tolerance through fuzzy matching, highlighting of result snippets matching the query, and more. Feel free to explore some of the capabilities on [this documentation page](https://www.mongodb.com/atlas/search).
+#### Exercise
+We will be creating search indexes on top of the new `wikipedia` collection. 
+[Follow the guidelines here](https://www.mongodb.com/docs/atlas/atlas-search/tutorial/create-index/) to create a new search index **via the Atlas UI**, keeping all configuration at default. Use the **Visual Editor** to create this index. 
+>Note that, for the free-tier M0 cluster, only 3 search indexes can be built.
 
+This default index configuration will capture all indexable fields and make them all available for search. This is called `dynamic indexing`, which is useful for collections within which documents' schemas change. However, this approach typically results in a larger index size. We will see how we can optimize this in the next exercise. 
+### **Exercise 11**: Create an *Optimized* Atlas Search Index
+#### Explanation
 
+#### Exercise
+
+### **Exercise 12**: Semantic Search
+#### Explanation
+
+#### Exercise
+
+### **Exercise 13**: Semantic Search with Pre-Filter
+#### Explanation
+
+#### Exercise
