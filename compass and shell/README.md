@@ -186,7 +186,7 @@ db.movies.find({'tomatoes.viewer.rating':{$gte:3.4}}).explain()
 
 [Compass GUI index creation example](https://www.mongodb.com/docs/compass/current/indexes/#create-an-index)
 
-Shell syntax for create an index: 
+Shell syntax to create an index: 
 ```bash
 db.<collectionName>.createIndex({<field>': <1|-1})
 ```
@@ -199,7 +199,7 @@ Create an index on `tomatoes.viewer.rating` (ascending or descending) and re-run
 You should now see `IXSCAN` (i.e. "index scan"), which means the query will leverage this new index to deliver the same results faster and more effiently. Previously, you should have seen `COLLSCAN` (i.e. "collection scan"), which means every document needed to be examined to fulfill the query. This is inefficient in the same way table scans are inefficient in SQL.
 
 ### **Exercise 8**: Aggregations
-#### Explanation
+#### Explanation and How-to
 Aggregations allow you to compute new data and support complex manipulation of documents such as calculating new/virtual fields, grouping & summarizing values, reshaping documents, migrating data, etc.
 
 Comparing syntax for `find(...)`:
@@ -244,27 +244,30 @@ let sort = {'tomatoes.viewer.rating': -1}
 ```bash
 let limit = 10
 ```
+
 ## Checkpoint 4: Atlas Search
 ### **Exercise 9**: Import Data Using Compass GUI
-#### Explanation
+#### Explanation and How-to
 Within this repo's `data/` folder, you will find a [`wikipedia_tiny.json`](https://github.com/nickgogan/MongoDBAtlasDeveloperDay/blob/main/data/wikipedia_tiny.json) file containing 5,000 documents. These documents are cleaned wikipedia articles that, among some other metadata, contain the article title, body in plaintext, and a 384-dimension vector representation of plaintext body. Below is a snippet of what the records look like:
 ![wikipedia file snippet as seen from Compass](https://github.com/nickgogan/MongoDBAtlasDeveloperDay/blob/main/compass%20and%20shell/images/Compass_WikpediaSchema.png)
 #### Exercise
-Create a new collection with database name `devday` and collection name `wikipedia`. Then, import the `wikipedia_tiny.json` tile into it. 
-[Please refer to this guide on how to import data files using the Compass GUI](https://www.mongodb.com/docs/compass/current/import-export/#import-data-into-a-collection)
+Create a new collection with database name `devday` and collection name `wikipedia`. Then, import the `wikipedia_tiny.json` tile into it. [Please refer to this guide on how to import data files using the Compass GUI](https://www.mongodb.com/docs/compass/current/import-export/#import-data-into-a-collection)
+
 ### **Exercise 10**: Create an Atlas Search Index
-#### Explanation
+#### Explanation and How-to
 [Atlas Search](https://www.mongodb.com/docs/atlas/atlas-search/) is an embedded full-text search capability in MongoDB Atlas that gives you a seamless, scalable experience for building relevance-based app features. Built on Apache Lucene, Atlas Search eliminates the need to run a separate search system alongside your database.
 
 In short, fulltext search queries typically deliver a wider range of records than regular database queries, and those records are returned sorted by `relevancy`. This means that top answers to those queries are computed to be more meaningful to the user. This is in opposition to database queries, where each record in the result set has equal weight to any other in the result set. 
 
 Moreover, fulltext search also delivers capabilities such as typo tolerance through fuzzy matching, highlighting of result snippets matching the query, and more. Feel free to explore some of the capabilities on [this documentation page](https://www.mongodb.com/atlas/search).
+
 #### Exercise
 We will be creating search indexes on top of the new `wikipedia` collection. 
+
 [Follow the guidelines here](https://www.mongodb.com/docs/atlas/atlas-search/tutorial/create-index/) to create a new search index **via the Atlas UI**, keeping all configuration at default. Use the **Visual Editor** to create this index. It will take a couple of minutes for the index to be built. The Atlas UI shows the state of the index as it changes. 
 
 ---
->Note that, for the free-tier M0 cluster, only 3 search indexes can be built.
+>Note that, for the free-tier M0 cluster, only 3 search indexes can be built. This is not a limitation for any other cluster tier.
 ---
 
 This default index configuration will capture all indexable fields and make them all available for search. This is called `dynamic indexing`, which is useful for collections within which documents' schemas change. However, this approach typically results in a larger index size. We will see how we can optimize this in the next exercise. 
@@ -395,8 +398,9 @@ db.wikipedia.aggregate(pipeline)
 ---
 
 ### **Exercise 11**: Create an *Optimized* Atlas Search Index
-#### Explanation
+#### Explanation & How-to
 In our case, we only care to search on the `title` and `text` fields of each document in the `wikipedia` collection. Moreover, our users exclusively search in English, so we will want title and text to be indexed by an analyzer intelligent enough to apply English grammar to the information. For example, if I search for the word `dog`, I should get back documents mentioning `dog` or `dogs`. If we were to index the information in French or German, the analyzer should be intelligent to understand gendered words and deal with various accent marks. There is [a wide and interesting world of analyzers](https://www.mongodb.com/docs/atlas/atlas-search/analyzers/) out there that are worth exploring!
+
 #### Exercise
 Please follow the instructions below to create a new search, optimized search index:
 1. In the **Atlas UI**, go to the **Search** page. There is a link called `Search` on the left-hand panel.
@@ -414,13 +418,15 @@ Please follow the instructions below to create a new search, optimized search in
 
 Since this index is scoped to a subset of the fields, it should build a little faster than the first one. Once it's built and has a status of `ACTIVE` like the first one, notice the size difference between the two indexes. For reference, here is a screenshot of mine:
 ![optimized vs default index size difference](https://github.com/nickgogan/MongoDBAtlasDeveloperDay/blob/main/compass%20and%20shell/images/Atlas_SearchIndexSizeComparison.png)
+
 ### **Exercise 12**: Semantic Search
-#### Explanation
+#### Explanation and How-to
 You can perform semantic search on data in your Atlas cluster running MongoDB v6.0.11 or later using Atlas Vector Search. You can store vector embeddings for any kind of data along with other data in your collection on the Atlas cluster. Atlas Vector Search supports embeddings that are less than and equal to 2048 dimensions in width.
 
 When you define an Atlas Vector Search index on your collection, you can seamlessly index vector data along with your other data and then perform semantic search against the indexed fields.
 
 Atlas Vector Search uses the [Hierarchical Navigable Small Worlds](https://arxiv.org/abs/1603.09320) algorithm to perform the semantic search. You can use Atlas Vector Search support for approximate nearest neighbord (aNN) queries to search for results similar to a selected product, search for images, etc.
+
 #### Exercise
 Let's create a search index using the embeddings already available for the `wikipedia` collection's docs. 
 
@@ -462,5 +468,6 @@ Once ready, try [running a vector search query](https://www.mongodb.com/docs/atl
 ### **Exercise 13**: Semantic Search with Pre-Filter
 #### Explanation
 Atlas's `$vectorSearch` stage has an optional `filter` parameter that can be used to pre-filter documents before performing the semantic search on the remainder. This typically leads to faster AND more accurate searches - win win!
+
 #### Exercise
 Run the same `$vectorSearch` query, but add a `filter` to the query to only target a specific `language` (english, french, german, italian, or frisian). Refer to the Filter Example on [this documentation page](https://www.mongodb.com/docs/atlas/atlas-vector-search/vector-search-stage/#examples).
