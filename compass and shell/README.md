@@ -84,11 +84,11 @@ Update your document to change John Doe's `lastName` to `Bo` and include the fol
 }
 ```
 Use the following query operators as reference (you won't need all of them for this exercise):
-- [set](https://www.mongodb.com/docs/manual/reference/operator/update/set/) - adds / updates fields.
-- [unset](https://www.mongodb.com/docs/manual/reference/operator/update/unset/) - Removes fields.
-- [inc](https://www.mongodb.com/docs/manual/reference/operator/update/inc/) - increments a field.
-- [pull](https://www.mongodb.com/docs/manual/reference/operator/update/pull/) / [push](https://www.mongodb.com/docs/manual/reference/operator/update/push/) - Removes or inserts into an array.
-- [convert](https://www.mongodb.com/docs/manual/reference/operator/aggregation/convert/) - Converts between data types.
+- `[set](https://www.mongodb.com/docs/manual/reference/operator/update/set/)` - adds / updates fields.
+- `[unset](https://www.mongodb.com/docs/manual/reference/operator/update/unset/)` - Removes fields.
+- `[inc](https://www.mongodb.com/docs/manual/reference/operator/update/inc/)` - increments a field.
+- `[pull](https://www.mongodb.com/docs/manual/reference/operator/update/pull/)` / [`push](https://www.mongodb.com/docs/manual/reference/operator/update/push/)` - Removes or inserts into an array.
+- `[convert](https://www.mongodb.com/docs/manual/reference/operator/aggregation/convert/)` - Converts between data types.
 
 ### **Exercise 3**: Delete operations
 ##
