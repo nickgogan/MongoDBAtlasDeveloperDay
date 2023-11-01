@@ -1,7 +1,23 @@
 # Table of Contents
 - [Table of Contents](#table-of-contents)
+- [Inventory](#inventory)
 - [Vectorize Query](#vectorize-query)
 - [Get your own clean wikipedia dataset](#get-your-own-clean-wikipedia-dataset)
+
+# Inventory
+
+`wikipedia_tiny.json` is meant to be used with [`mongoimport`](https://www.mongodb.com/docs/database-tools/mongoimport/) or Compass to import data, whereas `devday.10172023.wikipedia_tiny.gz` is the same file but compressed to make it easier to transfer around. Both were generated from Atlas using [mongoexport]()
+
+To import `wikipedia_tiny.json` into a cluster using a database user authenticating with SCRAM (i.e. user & password), please use [`mongoimport`](https://www.mongodb.com/docs/database-tools/mongoimport/) like this:
+```bash
+mongoimport 'mongodb+srv://<username>:<password>@<clustername>.<atlasProjectHash>.mongodb.net/' --file='wikipedia_tiny.json
+```
+To accomplish this using the Compass GUI, [follow this guide](https://www.mongodb.com/docs/compass/current/import-export/#import-data-into-a-collection).
+
+To import `devday.10172023.wikipedia_tiny.gz` into a cluster using a databse user authenticating with SCRAM (i.e. username & password), please use [mongorestore](https://www.mongodb.com/docs/database-tools/mongorestore/) like this:
+```bash
+mongorestore 'mongodb+srv://<username>:<password>@<clustername>.<atlasProjectHash>.mongodb.net' --archive='devday.10172023.wikipedia_tiny.gz' --gzip
+```
 
 # Vectorize Query
 
