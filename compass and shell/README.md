@@ -9,7 +9,7 @@ Please also refer to [the PDF of the presentation](https://github.com/nickgogan/
 
 ## Checkpoint 1: MongoDB Query Fundamentals
 
-1. Via the Atlas web GUI, [load up the sample dataset](https://www.mongodb.com/docs/atlas/sample-data/).
+1. Via the **Atlas web GUI**, [load up the sample dataset](https://www.mongodb.com/docs/atlas/sample-data/).
 
 
 2. [Get your Atlas cluster's connection string](https://www.mongodb.com/docs/guides/atlas/connection-string/) and [connect to it using Compass](https://www.mongodb.com/docs/atlas/compass-connection/).
@@ -20,17 +20,18 @@ Please also refer to [the PDF of the presentation](https://github.com/nickgogan/
 Most of the remaining exercises can be completed via either the Compass GUI or via [the embedded MongoDB shell](https://www.mongodb.com/docs/compass/current/embedded-shell/#open-the-embedded-mongodb-shell).
 
 ### **Exercise 1**: Insert operations
-References:
+#### Explanation
+The first thing that comes to mind for most people when they think MongoDB is the document model. It's of the most important features of MongoDB. You can think of documents, roughly, as JSON. However, MongoDB documents are actually [BSON (binary JSON)](https://www.mongodb.com/json-and-bson). BSON is a deep topic, so for the purposes of today's exercises, BSON allows for great compression (saving you disk space) AND [provides a rich type system](https://www.mongodb.com/docs/manual/reference/bson-types/) for doing cool stuff like geolocation queries, fulltext search, filtering based on dates, and performing *accurate* banking transactions (even though a rounding error bank-side would be nice if it was in my favor!)
+#### How-to
 1. [Compass GUI](https://www.mongodb.com/docs/compass/current/documents/insert/)
 2. Shell syntax (`{options}` is optional and not needed for this exercise):
-
 ```bash
 db.<collectionName>.insertOne({key:value},{options})
 ```
 ```bash
 db.<collectionName>.insertMany([{k:v},{k:v}],{options})
 ```
-
+#### Exercise
 Insert the following document into `mycoll`:
 ```JSON
 {
@@ -88,16 +89,11 @@ Update your document to change John Doe's `lastName` to `Bo` and include the fol
 }
 ```
 Use the following query operators as reference (you won't need all of them for this exercise):
-
-[set](https://www.mongodb.com/docs/manual/reference/operator/update/set/) - adds / updates fields.
-
-[unset](https://www.mongodb.com/docs/manual/reference/operator/update/unset/) - Removes fields.
-
-[inc](https://www.mongodb.com/docs/manual/reference/operator/update/inc/) - increments a field.
-
-[pull](https://www.mongodb.com/docs/manual/reference/operator/update/pull/) / [push](https://www.mongodb.com/docs/manual/reference/operator/update/push/) - Removes or inserts into an array.
-
-[convert](https://www.mongodb.com/docs/manual/reference/operator/aggregation/convert/) - Converts between data types.
+1. [set](https://www.mongodb.com/docs/manual/reference/operator/update/set/) - adds / updates fields.
+2. [unset](https://www.mongodb.com/docs/manual/reference/operator/update/unset/) - Removes fields.
+3. [inc](https://www.mongodb.com/docs/manual/reference/operator/update/inc/) - increments a field.
+4. [pull](https://www.mongodb.com/docs/manual/reference/operator/update/pull/) / [push](https://www.mongodb.com/docs/manual/reference/operator/update/push/) - Removes or inserts into an array.
+5. [convert](https://www.mongodb.com/docs/manual/reference/operator/aggregation/convert/) - Converts between data types.
 
 ### **Exercise 3**: Delete operations
 References:
