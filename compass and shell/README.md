@@ -261,15 +261,52 @@ In short, fulltext search queries typically deliver a wider range of records tha
 Moreover, fulltext search also delivers capabilities such as typo tolerance through fuzzy matching, highlighting of result snippets matching the query, and more. Feel free to explore some of the capabilities on [this documentation page](https://www.mongodb.com/atlas/search).
 #### Exercise
 We will be creating search indexes on top of the new `wikipedia` collection. 
-[Follow the guidelines here](https://www.mongodb.com/docs/atlas/atlas-search/tutorial/create-index/) to create a new search index **via the Atlas UI**, keeping all configuration at default. Use the **Visual Editor** to create this index. 
+[Follow the guidelines here](https://www.mongodb.com/docs/atlas/atlas-search/tutorial/create-index/) to create a new search index **via the Atlas UI**, keeping all configuration at default. Use the **Visual Editor** to create this index. It will take a couple of minutes for the index to be built. The Atlas UI shows the state of the index as it changes. 
 >Note that, for the free-tier M0 cluster, only 3 search indexes can be built.
 
 This default index configuration will capture all indexable fields and make them all available for search. This is called `dynamic indexing`, which is useful for collections within which documents' schemas change. However, this approach typically results in a larger index size. We will see how we can optimize this in the next exercise. 
+
+Once the index is ready, go back to Compass. Select the `wikipedia` collection and go to the `Aggregations` tab like before. Hit `Add Stage` and enter `$search` for the first stage. Compass should provide you with the syntax, which should look something like this:
+```
+/**
+ * index: The name of the Search index.
+ * text: Analyzed search, with required fields of query and path, the analyzed field(s) to search.
+ * compound: Combines ops.
+ * span: Find in text field regions.
+ * exists: Test for presence of a field.
+ * near: Find near number or date.
+ * range: Find in numeric or date range.
+ */
+{
+  index: 'string',
+  text: {
+    query: 'string',
+    path: 'string'
+  }
+}
+```
+
+
 ### **Exercise 11**: Create an *Optimized* Atlas Search Index
 #### Explanation
-
+In our case, we only care to search on the `title` and `text` fields of each document in the `wikipedia` collection. Moreover, our users exclusively search in English, so we will want title and text to be indexed by an analyzer intelligent enough to apply English grammar to the information. For example, if I search for the word `dog`, I should get back documents mentioning `dog` or `dogs`. If we were to index the information in French or German, the analyzer should be intelligent to understand gendered words and deal with various accent marks. There is [a wide and interesting world of analyzers](https://www.mongodb.com/docs/atlas/atlas-search/analyzers/) out there that are worth exploring!
 #### Exercise
+Please follow the instructions below to create a new search, optimized search index:
+1. In the **Atlas UI**, go to the **Search** page. There is a link called `Search` on the left-hand panel.
+2. Select your cluster and hit the `Go to Atlas Search` button. You should see the search index you previously made here. 
+3. Hit the `CREATE INDEX` button in the upper-right-hand side. 
+4. Keep `Visual Editor` selected and hit the `Next` button.
+5. Set the index name to `optimized` and select the `wikipedia` collection in the `devday` database. Hit `Next`.
+6. Click `Refine Your Index`.
+7. At the top of the page, for the `Index Analyzer` dropdown, select `lucene.english`.
+8. Disable `Dynamic Mapping`. We will specific the fields we want to index this time.
+9. Click `Add Field Mapping`. Enter `title` for the first field name and keep everything else the same. Hit `Add`.
+10. Repeat step 9 for the `text` field.
+11. Scroll down and hit `Save Changes`.
+12. Hit `Create Search Index` to create your new `optimized` index.
 
+Since this index is scoped to a subset of the fields, it should build a little faster than the first one. Once it's built and has a status of `ACTIVE` like the first one, notice the size difference between the two indexes. For reference, here is a screenshot of mine:
+![optimized vs default index size difference](https://github.com/nickgogan/MongoDBAtlasDeveloperDay/blob/main/compass%20and%20shell/images/Atlas_SearchIndexSizeComparison.png)
 ### **Exercise 12**: Semantic Search
 #### Explanation
 
