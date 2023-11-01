@@ -245,8 +245,9 @@ let sort = {'tomatoes.viewer.rating': -1}
 let limit = 10
 ```
 ## Checkpoint 4: Atlas Search
-### **Exercise 9**: Import Data Using Compass
-
+### **Exercise 9**: Import Data Using Compass GUI
+Within this repo's `data/` folder, you will find a [`wikipedia_tiny.json`](https://github.com/nickgogan/MongoDBAtlasDeveloperDay/blob/main/data/wikipedia_tiny.json) file containing 5,000 documents. These documents are cleaned wikipedia articles that, among some other metadata, contain the article title, body in plaintext, and a 384-dimension vector representation of plaintext body. Below is a snippet of what the records look like:
+[wikipedia file snippet as seen from Compass](https://github.com/nickgogan/MongoDBAtlasDeveloperDay/blob/main/compass%20and%20shell/images/Compass_WikpediaSchema.png)
 
 
 
