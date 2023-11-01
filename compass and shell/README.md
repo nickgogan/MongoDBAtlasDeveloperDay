@@ -72,7 +72,9 @@ References:
 `{options}` - Notably, `{upsert:true|false}`. If the record exists, update 
 it. If not, insert the contents of `{update}` as a document if it makes sense.
 
+
 > Fun fact: The shell is actually a javascript interpreter! This means you can do fun stuff like declare variables and loop through records directly in the shell, using modern javascript syntax. 
+
 
 Update your document to change John Doe's `lastName` to `Bo` and include the following additional address (John's been doing well for himself!):
 ```JSON
@@ -267,7 +269,7 @@ We will be creating search indexes on top of the new `wikipedia` collection.
 This default index configuration will capture all indexable fields and make them all available for search. This is called `dynamic indexing`, which is useful for collections within which documents' schemas change. However, this approach typically results in a larger index size. We will see how we can optimize this in the next exercise. 
 
 Once the index is ready, go back to Compass. Select the `wikipedia` collection and go to the `Aggregations` tab like before. Hit `Add Stage` and enter `$search` for the first stage. Compass should provide you with the syntax, which should look something like this:
-```
+```JSON
 /**
  * index: The name of the Search index.
  * text: Analyzed search, with required fields of query and path, the analyzed field(s) to search.
@@ -289,7 +291,7 @@ Once the index is ready, go back to Compass. Select the `wikipedia` collection a
 Play around with search queries, using [this documentation root](https://www.mongodb.com/docs/atlas/atlas-search/searching/) as a guide and the examples below.
 
 [Fuzzy search/typo tolerance](https://www.mongodb.com/docs/atlas/atlas-search/text/):
-```
+```JSON
 $search = {
   index: '<indexName>',
   text: {
@@ -303,7 +305,7 @@ $search = {
 }
 ```
 [Highlighting](https://www.mongodb.com/docs/atlas/atlas-search/highlighting/):
-```
+```JSON
 {
   index: '<indexName>',
   text: {
@@ -320,7 +322,7 @@ $search = {
 }
 ```
 [Compound search](https://www.mongodb.com/docs/atlas/atlas-search/compound/#definition):
-```
+```JSON
 {
   index: "<indexName",
   compound: {
