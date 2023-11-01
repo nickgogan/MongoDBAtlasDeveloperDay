@@ -166,11 +166,11 @@ Below doubles as both example shell syntax as well as a short explanation of wha
 
 `db.<collectionName>.find({filter})`: Returns a cursor (iterable pointer to many documents). [Compass GUI example](https://www.mongodb.com/docs/compass/current/query/filter/#set-query-filter).
 
-`db.<collectionName>.find({filter},{projection})`: Returns only the specified fields. Example: `db.movies.find({title: “Regeneration”}, {_id: 0, title: 1, fullplot: 1})`. [Compass GUI example](https://www.mongodb.com/docs/compass/current/query/project/).
+`db.<collectionName>.find({filter},{projection})`: Also returns a cursor to the matching documents, but provides only the specified fields. This is similar to a select-clause in SQL. Example: `db.movies.find({title: “Regeneration”}, {_id: 0, title: 1, fullplot: 1})`. Here, `0` means do NOT include the field and `1` means include it. Any field not explicitly set in the projection will be left out. By default, `_id` is always returned unless you explicitly say not to. This is because `_id` is the primary key whose global uniqueness is useful in most circumstances. [Compass GUI example](https://www.mongodb.com/docs/compass/current/query/project/).
 
-`db.<collectionName>.find({filter},{projection})`.sort([{‘<fieldName>’:<1|-1>}])
+`db.<collectionName>.find({filter},{projection})`.sort([{‘<fieldName>’:<1|-1>}]): Works the same way as the sort-clause in SQL, with `1` being `ASC` and `-1` being `DESC`.
 
-db.<collectionName>.find({filter},{projection}).skip(<int>)
+`db.<collectionName>.find({filter},{projection}).skip(<int>)`: Works the same way as the skip-clause in SQL, with `<int>` specifying the number of records the cursor should move past the matching records before getting returned to the client.
 
-db.<collectionName>.find({filter},{projection}).skip().limit(<int>)
+`db.<collectionName>.find({filter},{projection}).skip().limit(<int>)`: Works the same way as as the limit-clause in SQL, with `<int>` specifying the number of records that the cursor will be able to iterate to.
 
