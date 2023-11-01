@@ -71,9 +71,10 @@ References:
 
 `{options}` - Notably, `{upsert:true|false}`. If the record exists, update 
 it. If not, insert the contents of `{update}` as a document if it makes sense.
+
 ---
 > Fun fact: The shell is actually a javascript interpreter! This means you can do fun stuff like declare variables and loop through records directly in the shell, using modern javascript syntax. 
----
+
 Update your document to change John Doe's `lastName` to `Bo` and include the following additional address (John's been doing well for himself!):
 ```JSON
 { 
