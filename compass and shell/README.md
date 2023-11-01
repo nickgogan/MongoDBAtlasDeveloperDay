@@ -104,10 +104,10 @@ References:
 - [Compass GUI](https://www.mongodb.com/docs/compass/current/documents/delete/):
 - Shell syntax:
 ```bash
-db.collection.deleteOne({filter},{options})
+db.<collectionName>.deleteOne({filter},{options})
 ```
 ```bash
-db.collection.deleteMany({filter},{options})
+db.<collectionName>.deleteMany({filter},{options})
 ```
 `{filter}` - Which document(s) to delete (i.e. where-clause).
 
@@ -177,8 +177,7 @@ Below doubles as both example shell syntax as well as a short explanation of wha
 `db.<collectionName>.find({filter},{projection}).skip().limit(<int>)`: Works the same way as as the limit-clause in SQL, with `<int>` specifying the number of records that the cursor will be able to iterate to.
 
 #### Exercise
-Find the top 10 movies by Rotten Tomatoes rating with Brad Pitt in it. 
-Sort by highest rated.
+Find the top 10 movies by Rotten Tomatoes rating with Brad Pitt in it. Return the list in order from highest to lowest Rotten Tomatoes rating. 
 
 ## Checkpoint 3: Indexes and Aggregations
 ### **Exercise 7**: Indexes and Query Performance
@@ -189,9 +188,12 @@ To help you better understand the performance of your query, you can view your q
 
 Shell syntax explain example: `db.movies.find({'tomatoes.viewer.rating':{$gte:3.4}}).explain()`. Of course, `explain()` works with any valid query, not just simple ones like in this example.
 
-[Compass GUI index creation example]()
+[Compass GUI index creation example](https://www.mongodb.com/docs/compass/current/indexes/#create-an-index)
 
-Shell syntax for create an index: `db.movies.createIndex({<field>': <1|-1})`
+Shell syntax for create an index: 
+```bash
+db.<collectionName>.createIndex({<field>': <1|-1})
+```
 
 As with `sort(<field>': <1|-1})`, `1` means `ASC` and `-1` means `DESC`. If you know you need results sorted in a particular way most of the time, it helps to have a data structure like an index already sorted in the desired manner to reduce latency and hardware resources.
 
@@ -264,7 +266,10 @@ Moreover, fulltext search also delivers capabilities such as typo tolerance thro
 #### Exercise
 We will be creating search indexes on top of the new `wikipedia` collection. 
 [Follow the guidelines here](https://www.mongodb.com/docs/atlas/atlas-search/tutorial/create-index/) to create a new search index **via the Atlas UI**, keeping all configuration at default. Use the **Visual Editor** to create this index. It will take a couple of minutes for the index to be built. The Atlas UI shows the state of the index as it changes. 
+
+---
 >Note that, for the free-tier M0 cluster, only 3 search indexes can be built.
+---
 
 This default index configuration will capture all indexable fields and make them all available for search. This is called `dynamic indexing`, which is useful for collections within which documents' schemas change. However, this approach typically results in a larger index size. We will see how we can optimize this in the next exercise. 
 
@@ -292,7 +297,7 @@ Play around with search queries, using [this documentation root](https://www.mon
 
 [Fuzzy search/typo tolerance](https://www.mongodb.com/docs/atlas/atlas-search/text/):
 ```JSON
-$search = {
+{
   index: '<indexName>',
   text: {
 	  query: ‘<queryText>’,
@@ -345,7 +350,7 @@ $search = {
 }
 ```
 To see the `relevancy score` and `highlights`, add a subsequent `$project` stage to the pipeline:
-```
+```JSON
 score: {
     $meta: "searchScore",
   },
@@ -388,7 +393,10 @@ then:
 ```bash
 db.wikipedia.aggregate(pipeline)
 ```
+
+---
 >Fun fact: The pipeline above was [exported directly out of Compass](https://www.mongodb.com/docs/compass/current/agg-pipeline-builder/export-pipeline-results/) after I built & validated it via the GUI!
+---
 
 ### **Exercise 11**: Create an *Optimized* Atlas Search Index
 #### Explanation
