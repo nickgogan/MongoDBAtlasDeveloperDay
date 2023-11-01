@@ -114,16 +114,18 @@ No explanation needed here, just drop (i.e. delete) the entire `mydb` database u
 
 ### **Exercise 5**: Read operations (i.e. queries)
 #### Explanation
-
+Pretty self-explanatory - we will dive deeper into queries (i.e. "reads") through the next few exercises. 
 #### How-to
 [Example of how to query via the Compass GUI](https://www.mongodb.com/docs/compass/current/documents/view/).
 
+Shell syntax:
 ```bash
 db.<collectionName>.findOne({filter},{projection}) 
 ```
 ```bash
 db.<collectionName>.find({filter},{projection})
 ```
+
 Note that the latter command (`find()`), by default, returns a cursor (iterable pointer) to the documents matching the query. In the shell, you can append a `toArray()` after the `find()` to get all results at once. 
 #### Useful operators
 - [eq (equals)](https://www.mongodb.com/docs/manual/reference/operator/query/eq/) - Similar to a normal query.
@@ -152,20 +154,16 @@ Now:
 5. Find all movies where the Rotten Tomatoes rating is greater than 3.4.
 
 ### **Exercise 6**: Sort, Limit, Skip, Project
-
+#### Explanation & How-to
 Below doubles as both example shell syntax as well as a short explanation of what the operators do. Don't worry Compass GUI fans, just hit the `Options` button as show in the screenshot below to get the same options:
 ![open Compass query options](https://github.com/nickgogan/MongoDBAtlasDeveloperDay/blob/main/compass/images/Compass_QueryOptions.png)
 
-
-`db.<collectionName>.find({filter})`: Returns a cursor (iterable pointer to many documents). [Compass GUI example](https://www.mongodb.com/docs/compass/current/query/filter/#set-query-filter).
-
-`db.<collectionName>.find({filter},{projection})`: Also returns a cursor to the matching documents, but provides only the specified fields. This is similar to a select-clause in SQL. Example: `db.movies.find({title: “Regeneration”}, {_id: 0, title: 1, fullplot: 1})`. Here, `0` means do NOT include the field and `1` means include it. Any field not explicitly set in the projection will be left out. By default, `_id` is always returned unless you explicitly say not to. This is because `_id` is the primary key whose global uniqueness is useful in most circumstances. [Compass GUI example](https://www.mongodb.com/docs/compass/current/query/project/).
-
-`db.<collectionName>.find({filter},{projection})`.sort([{‘<fieldName>’:<1|-1>}]): Works the same way as the sort-clause in SQL, with `1` being `ASC` and `-1` being `DESC`.
-
-`db.<collectionName>.find({filter},{projection}).skip(<int>)`: Works the same way as the skip-clause in SQL, with `<int>` specifying the number of records the cursor should move past the matching records before getting returned to the client.
-
-`db.<collectionName>.find({filter},{projection}).skip().limit(<int>)`: Works the same way as as the limit-clause in SQL, with `<int>` specifying the number of records that the cursor will be able to iterate to.
+Shell syntax:
+- `db.<collectionName>.find({filter})`: Returns a cursor (iterable pointer to many documents). [Compass GUI example](https://www.mongodb.com/docs/compass/current/query/filter/#set-query-filter).
+- `db.<collectionName>.find({filter},{projection})`: Also returns a cursor to the matching documents, but provides only the specified fields. This is similar to a select-clause in SQL. Example: `db.movies.find({title: “Regeneration”}, {_id: 0, title: 1, fullplot: 1})`. Here, `0` means do NOT include the field and `1` means include it. Any field not explicitly set in the projection will be left out. By default, `_id` is always returned unless you explicitly say not to. This is because `_id` is the primary key whose global uniqueness is useful in most circumstances. [Compass GUI example](https://www.mongodb.com/docs/compass/current/query/project/).
+- `db.<collectionName>.find({filter},{projection}).sort([{‘<fieldName>’:<1|-1>}])`: Works the same way as the sort-clause in SQL, with `1` being `ASC` and `-1` being `DESC`.
+- `db.<collectionName>.find({filter},{projection}).skip(<int>)`: Works the same way as the skip-clause in SQL, with `<int>` specifying the number of records the cursor should move past the matching records before getting returned to the client.
+- `db.<collectionName>.find({filter},{projection}).skip().limit(<int>)`: Works the same way as as the limit-clause in SQL, with `<int>` specifying the number of records that the cursor will be able to iterate to.
 
 #### Exercise
 Find the top 10 movies by Rotten Tomatoes rating with Brad Pitt in it. Return the list in order from highest to lowest Rotten Tomatoes rating. 
