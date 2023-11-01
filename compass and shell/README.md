@@ -465,5 +465,6 @@ Once ready, try [running a vector search query](https://www.mongodb.com/docs/atl
 ```
 ### **Exercise 13**: Semantic Search with Pre-Filter
 #### Explanation
-Semantic
+Atlas's `$vectorSearch` stage has an optional `filter` parameter that can be used to pre-filter documents before performing the semantic search on the remainder. This typically leads to faster AND more accurate searches - win win!
 #### Exercise
+Run the same `$vectorSearch` query, but add a `filter` to the query to only target a specific `language` (english, french, german, italian, or frisian). Refer to the Filter Example on [this documentation page](https://www.mongodb.com/docs/atlas/atlas-vector-search/vector-search-stage/#examples).
