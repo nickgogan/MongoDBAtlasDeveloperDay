@@ -21,14 +21,16 @@ Most of the remaining exercises can be completed via either the Compass GUI or v
 #### Explanation
 The first thing that comes to mind for most people when they think MongoDB is the document model. It's of the most important features of MongoDB. You can think of documents, roughly, as JSON. However, MongoDB documents are actually [BSON (binary JSON)](https://www.mongodb.com/json-and-bson). BSON is a deep topic, so for the purposes of today's exercises, BSON allows for great compression (saving you disk space) AND [provides a rich type system](https://www.mongodb.com/docs/manual/reference/bson-types/) for doing cool stuff like geolocation queries, fulltext search, filtering based on dates, and performing *accurate* banking transactions (even though a rounding error bank-side would be nice if it was in my favor!)
 #### How-to
-1. [Compass GUI](https://www.mongodb.com/docs/compass/current/documents/insert/)
-2. Shell syntax (`{options}` is optional and not needed for this exercise):
+[Compass GUI inserts](https://www.mongodb.com/docs/compass/current/documents/insert/)
+
+Shell syntax (`{options}` is optional and not needed for this exercise):
 ```bash
 db.<collectionName>.insertOne({key:value},{options})
 ```
 ```bash
 db.<collectionName>.insertMany([{k:v},{k:v}],{options})
 ```
+- `{options}` - This allows users to configure the nature of inserts. The main option to consider is with `insertMany`, which can insert records in an ordered or unordered (but parallel) manner. Moreover, if `{ordered:true}` is present, a failed insert will stop the operation.
 #### Exercise
 Insert the following document into `mycoll`:
 ```JSON
@@ -55,8 +57,9 @@ Insert the following document into `mycoll`:
 #### Explanation
 MongoDB is a document database, which means that it lets you nest objects in the same document as well as have arrays of fields or even other objects! You can create almost any kind of document structure and MongoDB will allow you to store and query it in an intuitive manner, using, for example, dot notation to access nested fields. For example, you can access the value of `lastName` using `name.last`.
 #### How-to
-- [Compass GUI](https://www.mongodb.com/docs/compass/current/documents/modify/)
-- Shell syntax (`{options}` is optional and not needed for this exercise):
+[Compass GUI updates](https://www.mongodb.com/docs/compass/current/documents/modify/)
+
+Shell syntax (`{options}` is optional and not needed for this exercise):
  ```bash
  db.<collectionName>.updateOne({filter},{update},{options})
  ```
@@ -65,7 +68,7 @@ MongoDB is a document database, which means that it lets you nest objects in the
  ```
 - `{filter}` - Which documents to update (i.e. where-clause).
 - `{update}` - Either a replacement or a modification.
-- `{options}` - Notably, `{upsert:true|false}`. If the record exists, update it. If not, insert the contents of `{update}` as a document if it makes sense.
+- `{options}` - Notably, `{upsert:true|false}`. If the record exists, update it. If not, insert the contents of `{update}` as a document, if it makes sense to do so.
 
 ---
 > Fun fact: The shell is actually a javascript interpreter! This means you can do fun stuff like declare variables and loop through records directly in the shell, using modern javascript syntax. 
@@ -91,10 +94,12 @@ Use the following query operators as reference (you won't need all of them for t
 - [convert](https://www.mongodb.com/docs/manual/reference/operator/aggregation/convert/) - Converts between data types.
 
 ### **Exercise 3**: Delete operations
-##
-References:
-- [Compass GUI](https://www.mongodb.com/docs/compass/current/documents/delete/):
-- Shell syntax (`{options}` is optional and not needed for this exercise):
+#### Explanation
+Fairly self-explanation, these commands delete records that match the given `{filter}`.
+#### How-to
+[Compass GUI deletes](https://www.mongodb.com/docs/compass/current/documents/delete/).
+
+Shell syntax (`{options}` is optional and not needed for this exercise):
 ```bash
 db.<collectionName>.deleteOne({filter},{options})
 ```
@@ -105,11 +110,14 @@ db.<collectionName>.deleteMany({filter},{options})
 - `{options}` - Options include things like [write concern](https://www.mongodb.com/docs/manual/reference/write-concern/) (a mongoDB parameter for durability / performance tradeoffs) collation (for language support) and hint (index hinting).
 
 ### **Exercise 4**
-Now, drop (i.e. delete) `mydb` using the [Compass GUI](https://www.mongodb.com/docs/compass/current/databases/#drop-a-database).
-
+No explanation needed here, just drop (i.e. delete) the entire `mydb` database using the [Compass GUI](https://www.mongodb.com/docs/compass/current/databases/#drop-a-database).
 
 ### **Exercise 5**: Read operations (i.e. queries)
-#### Shell syntax
+#### Explanation
+
+#### How-to
+[Example of how to query via the Compass GUI](https://www.mongodb.com/docs/compass/current/documents/view/).
+
 ```bash
 db.<collectionName>.findOne({filter},{projection}) 
 ```
@@ -118,38 +126,30 @@ db.<collectionName>.find({filter},{projection})
 ```
 Note that the latter command (`find()`), by default, returns a cursor (iterable pointer) to the documents matching the query. In the shell, you can append a `toArray()` after the `find()` to get all results at once. 
 #### Useful operators
-[eq (equals)](https://www.mongodb.com/docs/manual/reference/operator/query/eq/) - Similar to a normal query
-
-[gt](https://www.mongodb.com/docs/manual/reference/operator/query/gt/)/[gte](https://www.mongodb.com/docs/manual/reference/operator/query/gte/)/[lt](https://www.mongodb.com/docs/manual/reference/operator/query/lt/)/[lte](https://www.mongodb.com/docs/manual/reference/operator/query/lte/) - Greater [and equal] / less than [and equal]: Important operators for range queries.
-
-[in:[]](https://www.mongodb.com/docs/manual/reference/operator/query/in/) / [nin:[]](https://www.mongodb.com/docs/manual/reference/operator/query/nin/) (in / not in): Multiple value equality match
-
-[ne](https://www.mongodb.com/docs/manual/reference/operator/query/ne/) - Not equals.
-
-[not](https://www.mongodb.com/docs/manual/reference/operator/query/not/): Inverses the logic of whatever queries follows it.
-
-[or](https://www.mongodb.com/docs/manual/reference/operator/query/or/): Boolean OR.
-
-[and](https://www.mongodb.com/docs/manual/reference/operator/query/and/): Boolean AND, usually used for specific nesting situations.
-
-[exists](https://www.mongodb.com/docs/manual/reference/operator/query/exists/): Filters based on the existence of a given field. Note that a field with value `NULL` counts as existing! Personally, I can recall being `NULL` a couple of times in my life. 
-
-[type](https://www.mongodb.com/docs/manual/reference/operator/query/type/): Filters based on [BSON type](https://www.mongodb.com/docs/manual/reference/bson-types/).
-
-[elemMatch](https://www.mongodb.com/docs/manual/reference/operator/query/elemMatch/): Query on objects in arrays.
-
-#### Setup
-Before proceeding to the exercise, switch to using the `sample_mflix` database's `movies` collection. If following using the shell, use the `use` keyword ([Reference](https://www.mongodb.com/docs/compass/current/embedded-shell/#use-the-embedded-mongodb-shell)).
-> Notice how the Compass shell provides suggestions (i.e. intellisense)!
+- [eq (equals)](https://www.mongodb.com/docs/manual/reference/operator/query/eq/) - Similar to a normal query.
+- [gt](https://www.mongodb.com/docs/manual/reference/operator/query/gt/)/[gte](https://www.mongodb.com/docs/manual/reference/operator/query/gte/)/[lt](https://www.mongodb.com/docs/manual/reference/operator/query/lt/)/[lte](https://www.mongodb.com/docs/manual/reference/operator/query/lte/) - Greater [and equal] / less than [and equal]: Important operators for range queries.
+- [in:[]](https://www.mongodb.com/docs/manual/reference/operator/query/in/) / [nin:[]](https://www.mongodb.com/docs/manual/reference/operator/query/nin/) (in / not in): Multiple value equality match.
+- [ne](https://www.mongodb.com/docs/manual/reference/operator/query/ne/) - Not equals.
+- [not](https://www.mongodb.com/docs/manual/reference/operator/query/not/): Inverses the logic of whatever queries follows it.
+- [or](https://www.mongodb.com/docs/manual/reference/operator/query/or/): Boolean OR.
+- [and](https://www.mongodb.com/docs/manual/reference/operator/query/and/): Boolean AND, usually used for specific nesting situations.
+- [exists](https://www.mongodb.com/docs/manual/reference/operator/query/exists/): Filters based on the existence of a given field. Note that a field with value `NULL` counts as existing! Personally, I can recall being `NULL` a couple of times in my life.
+- [type](https://www.mongodb.com/docs/manual/reference/operator/query/type/): Filters based on [BSON type](https://www.mongodb.com/docs/manual/reference/bson-types/).
+- [elemMatch](https://www.mongodb.com/docs/manual/reference/operator/query/elemMatch/): Query on objects in arrays.
 
 #### Exercise
+Before proceeding to the exercise, switch to using the `sample_mflix` database's `movies` collection. If following using the shell, use the `use` keyword ([Reference](https://www.mongodb.com/docs/compass/current/embedded-shell/#use-the-embedded-mongodb-shell)).
+
+---
+> Notice how the Compass shell provides suggestions (i.e. intellisense)!
+---
+
+Now:
 1. Find 1 movie with the title “Blacksmith Scene”.
 2. Find movies released in 1991 with Brad Pitt.
 3. Find all movies released after 1991.
 4. Find all records where the runtime fields does not exist.
 5. Find all movies where the Rotten Tomatoes rating is greater than 3.4.
-
-[Example of how to query via the Compass GUI](https://www.mongodb.com/docs/compass/current/documents/view/).
 
 ### **Exercise 6**: Sort, Limit, Skip, Project
 
