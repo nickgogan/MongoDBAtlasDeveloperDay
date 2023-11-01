@@ -7,7 +7,7 @@ Please also refer to [the PDF of the presentation](https://github.com/nickgogan/
 ## Checkpoint 0: Prerequisites
 1. As a workshop attendee/participants, please ensure that you have followed all of the [list of prerequisites](https://github.com/nickgogan/MongoDBAtlasDeveloperDay/tree/main#prerequisites). Then, please [install MongoDB Compass](https://www.mongodb.com/try/download/compass) and copy this repository to have access to the `wikipedia_tiny.json` file in `data/`.
 
-## Checkpoint 1: CRUD Operations in MongoDB
+## Checkpoint 1: MongoDB Query Fundamentals
 
 1. Via the Atlas web GUI, [load up the sample dataset](https://www.mongodb.com/docs/atlas/sample-data/).
 
@@ -97,7 +97,7 @@ Use the following query operators as reference (you won't need all of them for t
 
 [convert](https://www.mongodb.com/docs/manual/reference/operator/aggregation/convert/) - Converts between data types.
 
-### Exercise 3: Delete operations
+### **Exercise 3**: Delete operations
 References:
 - [Compass GUI](https://www.mongodb.com/docs/compass/current/documents/delete/):
 - Shell syntax:
@@ -111,11 +111,11 @@ db.collection.deleteMany({filter},{options})
 
 `{options}` - Options include things like [write concern](https://www.mongodb.com/docs/manual/reference/write-concern/) (a mongoDB parameter for durability / performance tradeoffs) collation (for language support) and hint (index hinting).
 
-### Exercise 4
+### **Exercise 4**
 Now, drop (i.e. delete) `mydb` using the [Compass GUI](https://www.mongodb.com/docs/compass/current/databases/#drop-a-database).
 
 
-### Exercise 5: Read operations (i.e. queries)
+### **Exercise 5**: Read operations (i.e. queries)
 #### Shell syntax
 ```bash
 db.<collectionName>.findOne({filter},{projection}) 
@@ -158,7 +158,7 @@ Before proceeding to the exercise, switch to using the `sample_mflix` database's
 
 [Example of how to query via the Compass GUI](https://www.mongodb.com/docs/compass/current/documents/view/).
 
-### Exercise 6: Sort, Limit, Skip, Project
+### **Exercise 6**: Sort, Limit, Skip, Project
 
 Below doubles as both example shell syntax as well as a short explanation of what the operators do. Don't worry Compass GUI fans, just hit the `Options` button as show in the screenshot below to get the same options:
 ![open Compass query options](https://github.com/nickgogan/MongoDBAtlasDeveloperDay/blob/main/compass/images/Compass_QueryOptions.png)
@@ -173,4 +173,81 @@ Below doubles as both example shell syntax as well as a short explanation of wha
 `db.<collectionName>.find({filter},{projection}).skip(<int>)`: Works the same way as the skip-clause in SQL, with `<int>` specifying the number of records the cursor should move past the matching records before getting returned to the client.
 
 `db.<collectionName>.find({filter},{projection}).skip().limit(<int>)`: Works the same way as as the limit-clause in SQL, with `<int>` specifying the number of records that the cursor will be able to iterate to.
+
+#### Exercise
+Find the top 10 movies by Rotten Tomatoes rating with Brad Pitt in it. 
+Sort by highest rated.
+
+## Checkpoint 3: Indexes and Aggregations
+### **Exercise 7**: Indexes and Query Performance
+#### Explanation
+To help you better understand the performance of your query, you can view your query's `explain plan`. The explain plan includes a Query Performance Summary with information on the execution of your query such as `execution time`, `number of returned documents`, `number of examined documents`, and `number of examined index keys`.
+#### How-to
+[Compass GUI explain example](https://www.mongodb.com/docs/compass/current/query-plan)
+
+Shell syntax explain example: `db.movies.find({'tomatoes.viewer.rating':{$gte:3.4}}).explain()`. Of course, `explain()` works with any valid query, not just simple ones like in this example.
+
+[Compass GUI index creation example]()
+
+Shell syntax for create an index: `db.movies.createIndex({<field>': <1|-1})`
+
+As with `sort(<field>': <1|-1})`, `1` means `ASC` and `-1` means `DESC`. If you know you need results sorted in a particular way most of the time, it helps to have a data structure like an index already sorted in the desired manner to reduce latency and hardware resources.
+
+#### Exercise
+Create an index on `tomatoes.viewer.rating` (ascending or descending) and re-run the `explain()`. 
+
+You should now see `IXSCAN` (i.e. "index scan"), which means the query will leverage this new index to deliver the same results faster and more effiently. Previously, you should have seen `COLLSCAN` (i.e. "collection scan"), which means every document needed to be examined to fulfill the query. This is inefficient in the same way table scans are inefficient in SQL.
+
+### **Exercise 8**: Aggregations
+#### Explanation
+Aggregations allow you to compute new data and support complex manipulation of documents such as calculating new/virtual fields, grouping & summarizing values, reshaping documents, migrating data, etc.
+
+Comparing syntax for `find(...)`:
+```bash
+db.listingsAndReviews.find(
+  { "address.country": "Canada" },
+  { "host.host_total_listings_count": 1, "host.host_name": 1})
+  .sort({"host.host_total_listings_count": -1}).limit(1)
+```
+vs `aggregate([...])`:
+```bash
+db.listingsAndReviews.aggregate([ //aggregate() - an array of objects
+  {$match: {"address.country": "Canada", "price": { $lt: 200, $gt: 100 }}},
+  {$project: {"host.host_total_listings_count": 1, "host.host_name": 1 }},
+  {$sort: { "host.host_total_listings_count": -1 }},
+  {$limit: 1}])
+```
+Notice how `aggregate()` works in a manner similar to \*nix piping, with the output of one stage becoming the input to the next stage of the aggregation *pipeline*. This linear approach make MongoDB aggregations much more straightforward to create and reason about, especially when using Compass, which provides sample output results at each stage among other helpful capabilities.
+
+Translating `find()`'s query operators from before to `aggregate()`:
+- [match](https://www.mongodb.com/docs/manual/reference/operator/aggregation/match/): Equivalent to `find(...)`.
+- [project](https://www.mongodb.com/docs/manual/reference/operator/aggregation/project/): Equivalent to `find({query},{projection})`.
+- [sort](https://www.mongodb.com/docs/manual/reference/operator/aggregation/sort/): Equivalent to `find(...).sort(<order>)`.
+- [limit](https://www.mongodb.com/docs/manual/reference/operator/aggregation/limit/): Equivalent to `find().limit(<int>)`.
+- [skip](https://www.mongodb.com/docs/manual/reference/operator/aggregation/skip/): Equivalent to `find().skip(<int>)`.
+- [count](https://www.mongodb.com/docs/manual/reference/operator/aggregation/count/): Equivalent to `find().count(<int>)`.
+
+For Compass GUI users, please refer to [this documentation page](https://www.mongodb.com/docs/compass/current/create-agg-pipeline/) for a quick walkthrough on creating aggregations via GUI.
+
+#### Exercise
+Translate the following `find()`-based query to an aggregation:
+`db.movies.find(filter, project).sort(sort).limit(limit)`, where 
+```bash
+let filter = {'cast': 'Brad Pitt'}
+```
+```bash
+let project = {_id: 0, title: 1}
+```
+```bash
+let sort = {'tomatoes.viewer.rating': -1}
+```
+```bash
+let limit = 10
+```
+## Checkpoint 4: Atlas Search
+### **Exercise 9**: Import Data Using Compass
+
+
+
+
 
