@@ -2,7 +2,7 @@
 
 The following is a plaintext version of the exercises in the PDF presentations. It is meant to guide workshop participants through the process by providing code snippets that can be easily copy/pasted into the [MongoDB Compass GUI](https://www.mongodb.com/docs/compass/current/) and its embedded [MongoDB shell (mongosh)](https://www.mongodb.com/docs/mongodb-shell/).
 
-Please also refer to [the PDF of the presentation](https://github.com/nickgogan/MongoDBAtlasDeveloperDay/blob/main/DevDayPresentation_Full.pdf) to see helpful screenshots to aid in completing the exercises. Answers for both the Compass GUI approach and shell approach are in the PDF. For slides originally containing GIFs, this README will provide either plaintext explanations and/or links to tutorials that walk through exactly the same process as what was captured in the GIF. 
+Please also refer to [the PDF of the presentation](https://github.com/nickgogan/MongoDBAtlasDeveloperDay/blob/main/DevDayPresentation_Full.pdf) to see helpful screenshots to aid in completing the exercises. Answers for both the Compass GUI approach and shell approach are in the PDF, but plaintext versions can be found in the `answers/` folder. For slides originally containing GIFs, this README will provide either plaintext explanations and/or links to tutorials that walk through exactly the same process as what was captured in the GIF. 
 
 ## Checkpoint 0: Prerequisites
 1. As a workshop attendee/participants, please ensure that you have followed all of the [list of prerequisites](https://github.com/nickgogan/MongoDBAtlasDeveloperDay/tree/main#prerequisites). Then, please [install MongoDB Compass](https://www.mongodb.com/try/download/compass) and copy this repository to have access to the `wikipedia_tiny.json` file in `data/`.
@@ -11,9 +11,7 @@ Please also refer to [the PDF of the presentation](https://github.com/nickgogan/
 
 1. Via the **Atlas web GUI**, [load up the sample dataset](https://www.mongodb.com/docs/atlas/sample-data/).
 
-
 2. [Get your Atlas cluster's connection string](https://www.mongodb.com/docs/guides/atlas/connection-string/) and [connect to it using Compass](https://www.mongodb.com/docs/atlas/compass-connection/).
-
 
 3. Use Compass to [create a database named `mydb` and collection named `mycoll`](https://www.mongodb.com/docs/compass/current/databases/#create-a-database) (equivalent to a table in SQL) in your Atlas cluster. No need to specify any collection properties. The first set of exercises will be done in this collection. 
 
@@ -54,24 +52,20 @@ Insert the following document into `mycoll`:
 ```
 
 ### **Exercise 2**: Update operations
-
+#### Explanation
 MongoDB is a document database, which means that it lets you nest objects in the same document as well as have arrays of fields or even other objects! You can create almost any kind of document structure and MongoDB will allow you to store and query it in an intuitive manner, using, for example, dot notation to access nested fields. For example, you can access the value of `lastName` using `name.last`.
-
-References:
+#### How-to
 - [Compass GUI](https://www.mongodb.com/docs/compass/current/documents/modify/)
-- Shell syntax:
+- Shell syntax (`{options}` is optional and not needed for this exercise):
  ```bash
  db.<collectionName>.updateOne({filter},{update},{options})
  ```
  ```bash
  db.<collectionName>.updateMany({filter},{update},{options})
  ```
-`{filter}` - Which documents to update (i.e. where-clause).
-
-`{update}` - Either a replacement or a modification.
-
-`{options}` - Notably, `{upsert:true|false}`. If the record exists, update 
-it. If not, insert the contents of `{update}` as a document if it makes sense.
+- `{filter}` - Which documents to update (i.e. where-clause).
+- `{update}` - Either a replacement or a modification.
+- `{options}` - Notably, `{upsert:true|false}`. If the record exists, update it. If not, insert the contents of `{update}` as a document if it makes sense.
 
 ---
 > Fun fact: The shell is actually a javascript interpreter! This means you can do fun stuff like declare variables and loop through records directly in the shell, using modern javascript syntax. 
