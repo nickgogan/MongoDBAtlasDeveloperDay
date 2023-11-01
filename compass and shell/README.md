@@ -175,7 +175,14 @@ To help you better understand the performance of your query, you can view your q
 #### How-to
 [Compass GUI explain example](https://www.mongodb.com/docs/compass/current/query-plan)
 
-Shell syntax explain example: `db.movies.find({'tomatoes.viewer.rating':{$gte:3.4}}).explain()`. Of course, `explain()` works with any valid query, not just simple ones like in this example.
+Shell syntax explain example: 
+```bash
+db.movies.find({'tomatoes.viewer.rating':{$gte:3.4}}).explain()
+``` 
+
+---
+> Of course, `explain()` works with any valid query, not just simple ones like in this example.
+---
 
 [Compass GUI index creation example](https://www.mongodb.com/docs/compass/current/indexes/#create-an-index)
 
