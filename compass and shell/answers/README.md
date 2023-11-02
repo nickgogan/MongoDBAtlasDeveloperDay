@@ -99,3 +99,15 @@ Copy the shell queries' `{filter}` and pass them into the `Filter` bar near the 
 ![compass filter options to set parameters like skip, limit, sort, projection, etc via the compass GUI](https://github.com/nickgogan/MongoDBAtlasDeveloperDay/blob/main/compass%20and%20shell/images/Compass_QueryOptions.png)
 2. Then, fill the fields like so:
 ![compass advanced query exercise answer](https://github.com/nickgogan/MongoDBAtlasDeveloperDay/blob/main/compass%20and%20shell/images/Compass_AdvancedQuery.png)
+
+## **Exercise 7**: Indexes and Query Performance
+### Shell
+
+
+### Compass
+1. First, review how to use the Compass GUI to examine a given query:
+![how to examine a query for performance via the compass ui. it shows that mongodb is doing a collection scan, i.e. COLLSCAN, which is analagous to a table scane in the SQL world. It's not something you typically want to see.](https://github.com/nickgogan/MongoDBAtlasDeveloperDay/blob/main/compass%20and%20shell/images/Compass_ExamineQueryBeforeIndex.gif)
+1. Next, create an index:
+![how to create an index using the compass ui](https://github.com/nickgogan/MongoDBAtlasDeveloperDay/blob/main/compass%20and%20shell/images/Compass_CreateIndex.gif)
+1. Finally, re-examine the same query and see the difference. It should look something like this:
+![the explain should now show mongodb doing an index scan, i.e. IXSCAN, followed by a fetch, which are much faster and more resource-efficient than scanning all documents as in the collection scan before.](https://github.com/nickgogan/MongoDBAtlasDeveloperDay/blob/main/compass%20and%20shell/images/Compass_ExamineQueryAfterIndex.gif)
