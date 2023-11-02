@@ -102,7 +102,9 @@ Copy the shell queries' `{filter}` and pass them into the `Filter` bar near the 
 
 ## **Exercise 7**: Indexes and Query Performance
 ### Shell
-
+1. First, run the `explain()` command on your query as so: ```db.movies.find({'tomatoes.viewer.rating':{$gte:3.4}}).explain()```
+2. Next, create an index on `tomatoes.viewer.rating`: ```db.movies.createIndex({'tomatoes.viewer.rating': 1})```
+3. Finally, re-run the `explain()` query to confirm that MongoDB will leverage the new index to fulfill that query: ```db.movies.find({'tomatoes.viewer.rating':{$gte:3.4}}).explain()```
 
 ### Compass
 1. First, review how to use the Compass GUI to examine a given query:
