@@ -62,11 +62,11 @@ Compass:
 
 ## **Exercise 5**: Read operations (i.e. queries)
 Shell:
-```db.movies.find({title: “Regeneration”})```
-```db.movies.find({year:1991, cast:'Brad Pitt'})```
-```db.movies.find({year: {$gt: 1991}})```
-```db.movies.find({runtime: {$exists: false}})```
-```db.movies.find({'tomatoes.viewer.rating':{$gte:3.4}})```
+1. ```db.movies.find({title: “Regeneration”})```
+2. ```db.movies.find({year:1991, cast:'Brad Pitt'})```
+3. ```db.movies.find({year: {$gt: 1991}})```
+4. ```db.movies.find({runtime: {$exists: false}})```
+5. ```db.movies.find({'tomatoes.viewer.rating':{$gte:3.4}})```
 
 Compass: Copy the shell queries' `{filter}` and pass them into the `Filter` bar near the top, as exemplified below. For example, the `{filter}` portion of this shell `db.movies.find({title: “Regeneration”})` is `{title: “Regeneration”}`:
 ![compass basic read exercise how-to. Use the shell answers to get the queries and place them where indicated in this gif](https://github.com/nickgogan/MongoDBAtlasDeveloperDay/blob/main/compass%20and%20shell/images/Compass_BasicFind.gif)
