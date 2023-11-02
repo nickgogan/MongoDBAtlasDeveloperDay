@@ -127,6 +127,6 @@ Notice how, in the second run of `explain()`, MongoDB shows that it will leverag
    ```
 
 2. ```
-   db.movies.aggregate(pipeline)
+  db.movies.aggregate(pipeline)
    ```
 ### Compass
