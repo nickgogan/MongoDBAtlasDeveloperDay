@@ -109,7 +109,7 @@ db.<collectionName>.deleteMany({filter},{options})
 - `{filter}` - Which document(s) to delete (i.e. where-clause).
 - `{options}` - Options include things like [write concern](https://www.mongodb.com/docs/manual/reference/write-concern/) (a mongoDB parameter for durability / performance tradeoffs) collation (for language support) and hint (index hinting).
 
-### **Exercise 4**
+### **Exercise 4**: Drop a database using the Compass GUI
 No explanation needed here, just drop (i.e. delete) the entire `mydb` database using the [Compass GUI](https://www.mongodb.com/docs/compass/current/databases/#drop-a-database).
 
 ### **Exercise 5**: Read operations (i.e. queries)
