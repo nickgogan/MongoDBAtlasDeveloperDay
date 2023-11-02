@@ -130,3 +130,9 @@ Notice how, in the second run of `explain()`, MongoDB shows that it will leverag
    db.movies.aggregate(pipeline)
    ```
 ### Compass
+1. First, go to the Aggregation builder:
+![how to get to the aggregation builder in the compass ui](https://github.com/nickgogan/MongoDBAtlasDeveloperDay/blob/main/compass%20and%20shell/images/Compass_AggBuilder.png)
+2. Then, start adding the pipeline stages like so:
+![The first stage is $match with a single filter criterion on the cast field that looks like {'cast':'Brad Pitt}. What's cool about this is that the cast field is an array, but we can query it like any other field.](https://github.com/nickgogan/MongoDBAtlasDeveloperDay/blob/main/compass%20and%20shell/images/Compass_AdvancedFind1.png)
+![the next stage is $project where we set _id:0 to remove it and title:1. This means that we only see titles. The next stage is $sort, where we sort by rotten tomatoes ratings in descending order. Notice how we can use dot-notation to access nested fields.](https://github.com/nickgogan/MongoDBAtlasDeveloperDay/blob/main/compass%20and%20shell/images/Compass_AdvancedFind2.png)
+![the last stage is $limit, with a value of 10](https://github.com/nickgogan/MongoDBAtlasDeveloperDay/blob/main/compass%20and%20shell/images/Compass_AdvancedFind3.png)
