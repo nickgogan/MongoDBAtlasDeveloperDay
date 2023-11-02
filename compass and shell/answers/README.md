@@ -82,7 +82,7 @@ Compass: Copy the shell queries' `{filter}` and pass them into the `Filter` bar 
 ![compass basic read exercise how-to. Use the shell answers to get the queries and place them where indicated in this gif](https://github.com/nickgogan/MongoDBAtlasDeveloperDay/blob/main/compass%20and%20shell/images/Compass_BasicFind.gif)
 
 ## **Exercise 6**: Sort, Limit, Skip, Project
-Shell: 
+### Shell
 1. ```
    let filter = {'cast': 'Brad Pitt'}
    ```
@@ -99,7 +99,7 @@ Shell:
    db.movies.find(filter, project).sort(sort).limit(10)
    ```
 
-Compass: 
+### Compass
 1. First, open the `Options` for the `Filter` bar like so:
 ![compass filter options to set parameters like skip, limit, sort, projection, etc via the compass GUI](https://github.com/nickgogan/MongoDBAtlasDeveloperDay/blob/main/compass%20and%20shell/images/Compass_QueryOptions.png)
 2. Then, fill the fields like so:
