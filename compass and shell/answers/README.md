@@ -1,8 +1,7 @@
 # Exercise Answers
 
 ## **Exercise 1**: Insert operations
-
-Shell: 
+### Shell
 ```
 db.mycoll.insertOne({
     "name" : {
@@ -21,13 +20,11 @@ db.mycoll.insertOne({
   "retirement_fund" : 1292815.75
 })
 ```
-
-Compass: 
+### Compass
 ![compass insert exercise answer](https://github.com/nickgogan/MongoDBAtlasDeveloperDay/blob/main/compass%20and%20shell/images/Compass_InsertOne.png)
 
 ## **Exercise 2**: Update operations
-
-Shell:
+### Shell
 ```
 let newAddress = { 
   "location" : "home",
@@ -41,17 +38,15 @@ let newAddress = {
 ```
 db.mycoll.updateOne({'name.last': 'Doe'},{$set: {'name.last': 'Bo'},$push: {'address': newAddress}})
 ```
-
-Compass:
+### Compass
 ![compass update exercise answer](https://github.com/nickgogan/MongoDBAtlasDeveloperDay/blob/main/compass%20and%20shell/images/Compass_UpdateOne.png)
 
 ## **Exercise 3**: Delete operations
-Shell:
+### Shell
 ```
 db.mycoll.deleteOne({'name.last': 'Bo'})
 ```
-
-Compass:
+### Compass
 ![compass delete exercise answer](https://github.com/nickgogan/MongoDBAtlasDeveloperDay/blob/main/compass%20and%20shell/images/Compass_DeleteOne.png)
 
 ## **Exercise 4**: Drop a database using the Compass GUI
@@ -61,7 +56,7 @@ Compass:
 ![compass drop database exercise answer pt 2](https://github.com/nickgogan/MongoDBAtlasDeveloperDay/blob/main/compass%20and%20shell/images/Compass_DropDB2.png)
 
 ## **Exercise 5**: Read operations (i.e. queries)
-Shell:
+### Shell
 1. ```
    db.movies.find({title: “Regeneration”})
    ```
@@ -77,8 +72,8 @@ Shell:
 5. ```
    db.movies.find({'tomatoes.viewer.rating':{$gte:3.4}})
    ```
-
-Compass: Copy the shell queries' `{filter}` and pass them into the `Filter` bar near the top, as exemplified below. For example, the `{filter}` portion of this shell `db.movies.find({title: “Regeneration”})` is `{title: “Regeneration”}`:
+### Compass
+Copy the shell queries' `{filter}` and pass them into the `Filter` bar near the top, as exemplified below. For example, the `{filter}` portion of this shell `db.movies.find({title: “Regeneration”})` is `{title: “Regeneration”}`:
 ![compass basic read exercise how-to. Use the shell answers to get the queries and place them where indicated in this gif](https://github.com/nickgogan/MongoDBAtlasDeveloperDay/blob/main/compass%20and%20shell/images/Compass_BasicFind.gif)
 
 ## **Exercise 6**: Sort, Limit, Skip, Project
