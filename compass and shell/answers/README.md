@@ -3,7 +3,7 @@
 ## **Exercise 1**: Insert operations
 
 Shell: 
-```bash
+```
 db.mycoll.insertOne({
     "name" : {
       "first" : "John",
@@ -14,8 +14,7 @@ db.mycoll.insertOne({
           "street" : "16 Hatfields",
           "city" : "London",
           "postal_code" : "SE1 8DJ"},
-        "geo" : { "type" : "Point", "coord" : [
-         -0.109081, 51.5065752]}
+        "geo" : { "type" : "Point", "coord" : [-0.109081, 51.5065752]}
       }
   ],
   "dob" :"1977-04-01T05:00:00Z",
@@ -24,4 +23,24 @@ db.mycoll.insertOne({
 ```
 
 Compass: 
-![]
+![compass insert exercise example](https://github.com/nickgogan/MongoDBAtlasDeveloperDay/blob/main/compass%20and%20shell/images/Compass_InsertOne.png)
+
+## **Exercise 2**: Update operations
+
+Shell:
+```
+let newAddress = { 
+  "location" : "home",
+  "address" : {
+    "street" : "123 ABC Street",
+    "city" : "AAA",
+    "postal_code" : "111111"
+  }
+}
+```
+```
+db.mycoll.updateOne({'name.last': 'Doe'},{$set: {'name.last': 'Bo'},$push: {'address': newAddress}})
+```
+
+Compass:
+![]()
