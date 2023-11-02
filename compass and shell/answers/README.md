@@ -23,7 +23,7 @@ db.mycoll.insertOne({
 ```
 
 Compass: 
-![compass insert exercise example](https://github.com/nickgogan/MongoDBAtlasDeveloperDay/blob/main/compass%20and%20shell/images/Compass_InsertOne.png)
+![compass insert exercise answer](https://github.com/nickgogan/MongoDBAtlasDeveloperDay/blob/main/compass%20and%20shell/images/Compass_InsertOne.png)
 
 ## **Exercise 2**: Update operations
 
@@ -43,4 +43,19 @@ db.mycoll.updateOne({'name.last': 'Doe'},{$set: {'name.last': 'Bo'},$push: {'add
 ```
 
 Compass:
-![]()
+![compass update exercise answer](https://github.com/nickgogan/MongoDBAtlasDeveloperDay/blob/main/compass%20and%20shell/images/Compass_UpdateOne.png)
+
+## **Exercise 3**: Delete operations
+Shell:
+```
+db.mycoll.deleteOne({'name.last': 'Bo'})
+```
+
+Compass:
+![compass delete exercise answer](https://github.com/nickgogan/MongoDBAtlasDeveloperDay/blob/main/compass%20and%20shell/images/Compass_DeleteOne.png)
+
+## **Exercise 4**: Drop a database using the Compass GUI
+
+![compass drop database exercise answer pt 1](https://github.com/nickgogan/MongoDBAtlasDeveloperDay/blob/main/compass%20and%20shell/images/Compass_DropDB1.png)
+
+![compass drop database exercise answer pt 2](https://github.com/nickgogan/MongoDBAtlasDeveloperDay/blob/main/compass%20and%20shell/images/Compass_DropDB2.png)
