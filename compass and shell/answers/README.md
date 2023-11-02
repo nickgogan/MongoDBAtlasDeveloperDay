@@ -99,5 +99,8 @@ Shell:
    db.movies.find(filter, project).sort(sort).limit(10)
    ```
 
-Compass: First, open the `Options` for the `Filter` bar like so:
-![compass filter options to set parameters like skip, limit, sort, projection, etc via the compass GUI]()
+Compass: 
+1. First, open the `Options` for the `Filter` bar like so:
+![compass filter options to set parameters like skip, limit, sort, projection, etc via the compass GUI](https://github.com/nickgogan/MongoDBAtlasDeveloperDay/blob/main/compass%20and%20shell/images/Compass_QueryOptions.png)
+2. Then, fill the fields like so:
+![compass advanced query exercise answer](https://github.com/nickgogan/MongoDBAtlasDeveloperDay/blob/main/compass%20and%20shell/images/Compass_AdvancedQuery.png)
