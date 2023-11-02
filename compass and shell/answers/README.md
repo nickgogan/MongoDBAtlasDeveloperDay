@@ -102,9 +102,11 @@ Copy the shell queries' `{filter}` and pass them into the `Filter` bar near the 
 
 ## **Exercise 7**: Indexes and Query Performance
 ### Shell
-1. First, run the `explain()` command on your query as so: ```db.movies.find({'tomatoes.viewer.rating':{$gte:3.4}}).explain()```
-2. Next, create an index on `tomatoes.viewer.rating`: ```db.movies.createIndex({'tomatoes.viewer.rating': 1})```
-3. Finally, re-run the `explain()` query to confirm that MongoDB will leverage the new index to fulfill that query: ```db.movies.find({'tomatoes.viewer.rating':{$gte:3.4}}).explain()```
+1. ```db.movies.find({'tomatoes.viewer.rating':{$gte:3.4}}).explain()```
+2. ```db.movies.createIndex({'tomatoes.viewer.rating': 1})```
+3. ```db.movies.find({'tomatoes.viewer.rating':{$gte:3.4}}).explain()```
+
+Notice how, in the second run of `explain()`, MongoDB shows that it will leverage the new index to fulfill the query. 
 
 ### Compass
 1. First, review how to use the Compass GUI to examine a given query:
@@ -113,3 +115,15 @@ Copy the shell queries' `{filter}` and pass them into the `Filter` bar near the 
 ![how to create an index using the compass ui](https://github.com/nickgogan/MongoDBAtlasDeveloperDay/blob/main/compass%20and%20shell/images/Compass_CreateIndex.gif)
 1. Finally, re-examine the same query and see the difference. It should look something like this:
 ![the explain should now show mongodb doing an index scan, i.e. IXSCAN, followed by a fetch, which are much faster and more resource-efficient than scanning all documents as in the collection scan before.](https://github.com/nickgogan/MongoDBAtlasDeveloperDay/blob/main/compass%20and%20shell/images/Compass_ExamineQueryAfterIndex.gif)
+
+## **Exercise 8**: Indexes and Query Performance
+### Shell
+1. ```let pipeline = [
+  {$match: { ‘cast’: "Brad Pitt",}},
+  {$project: { _id: 0, title: 1}},
+  {$sort: { "tomatoes.viewer.rating": -1}},
+  {$limit: 10}
+]```
+2. ```
+  db.movies.aggregate(pipeline)```
+### Compass
