@@ -62,7 +62,9 @@ Compass:
 
 ## **Exercise 5**: Read operations (i.e. queries)
 Shell:
-1. ```db.movies.find({title: “Regeneration”})```
+1. ```
+   db.movies.find({title: “Regeneration”})
+   ```
 2. ```db.movies.find({year:1991, cast:'Brad Pitt'})```
 3. ```db.movies.find({year: {$gt: 1991}})```
 4. ```db.movies.find({runtime: {$exists: false}})```
