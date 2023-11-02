@@ -118,12 +118,14 @@ Notice how, in the second run of `explain()`, MongoDB shows that it will leverag
 
 ## **Exercise 8**: Indexes and Query Performance
 ### Shell
-1. ```let pipeline = [
-  {$match: { ‘cast’: "Brad Pitt",}},
-  {$project: { _id: 0, title: 1}},
-  {$sort: { "tomatoes.viewer.rating": -1}},
-  {$limit: 10}
-]```
+1. ```
+   let pipeline = [
+     {$match: { ‘cast’: "Brad Pitt",}},
+     {$project: { _id: 0, title: 1}},
+     {$sort: { "tomatoes.viewer.rating": -1}},
+     {$limit: 10}]
+   ```
 2. ```
-  db.movies.aggregate(pipeline)```
+  db.movies.aggregate(pipeline)
+  ```
 ### Compass
