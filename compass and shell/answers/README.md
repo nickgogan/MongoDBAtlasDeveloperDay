@@ -226,4 +226,26 @@ It should take only a couple of minutes for this index to be created and reach `
    db.wikipedia.aggregate(agg)
    ```
 ### Compass
+![$vectorSearch aggregation via the compass ui](https://github.com/nickgogan/MongoDBAtlasDeveloperDay/blob/main/compass%20and%20shell/images/Compass_SemanticSearch.png)
 
+## **Exercise 13**: Semantic Search with Filter
+### Shell
+1. ```
+   let agg = [{
+   $vectorSearch: {
+      queryVector: vector,
+      Path: ‘vector’,
+      numCandidates: 50,
+      index: ‘vector’,
+      limit: 10,
+      filter: {
+         $and: [{
+         'language': {$eq:'english'}
+         }]
+      }
+   }
+   }]
+  ```
+2. ```
+   db.wikipedia.aggregate(agg)
+   ```
