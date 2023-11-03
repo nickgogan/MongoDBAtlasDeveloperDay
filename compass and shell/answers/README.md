@@ -215,7 +215,7 @@ It should take only a couple of minutes for this index to be created and reach `
    let agg = [{
    $vectorSearch: {
       queryVector: vector,
-      Path: ‘vector’,
+      path: ‘vector’,
       numCandidates: 50,
       index: ‘vector’,
       limit: 10,
@@ -225,6 +225,5 @@ It should take only a couple of minutes for this index to be created and reach `
 4. ```
    db.wikipedia.aggregate(agg)
    ```
-
 ### Compass
 
