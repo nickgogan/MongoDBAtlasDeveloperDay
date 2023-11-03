@@ -249,3 +249,5 @@ It should take only a couple of minutes for this index to be created and reach `
 2. ```
    db.wikipedia.aggregate(agg)
    ```
+### Compass
+![the same $vectorSearch aggregation as the previous exercise, but augmented with a filter clause to only run semantic search on the english subset of the wikipedia collection. The query uses the language field of the schema.](https://github.com/nickgogan/MongoDBAtlasDeveloperDay/blob/main/compass%20and%20shell/images/Compass_SemanticSearchWithFilter.png)
