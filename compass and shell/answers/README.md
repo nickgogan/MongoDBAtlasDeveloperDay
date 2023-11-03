@@ -140,4 +140,8 @@ Notice how, in the second run of `explain()`, MongoDB shows that it will leverag
 BONUS: You can use Compass to craft aggregations and then [export them to either shell syntax or the programming language of your choise](https://www.mongodb.com/docs/compass/current/agg-pipeline-builder/export-pipeline-results/): 
 ![export aggregations to either shell syntax or a supported programming language](https://github.com/nickgogan/MongoDBAtlasDeveloperDay/blob/main/compass%20and%20shell/images/Compass_AggExport.png)
 
-## **Exercise 9**: 
+## **Exercise 9**: Import Data Using Compass GUI
+![create a new database named devday with a regular collection called wikipedia. Then, import the wikipedia_tiny.json file to the collection](https://github.com/nickgogan/MongoDBAtlasDeveloperDay/blob/main/compass%20and%20shell/images/Compass_ImportWikipediaData.gif)
+
+Once done, you should see 5,000 documents in the `wikipedia` collection with a schema like this:
+![screenshot of compass gui showing what a handful of documents look like from the wikipedia_tiny.json file](https://github.com/nickgogan/MongoDBAtlasDeveloperDay/blob/main/compass%20and%20shell/images/Compass_WikpediaSchema.png)
