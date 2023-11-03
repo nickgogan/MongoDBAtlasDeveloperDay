@@ -253,7 +253,7 @@ Within this repo's `data/` folder, you will find a [`wikipedia_tiny.json`](https
 #### Exercise
 Create a new collection with database name `devday` and collection name `wikipedia`. Then, import the `wikipedia_tiny.json` tile into it. [Please refer to this guide on how to import data files using the Compass GUI](https://www.mongodb.com/docs/compass/current/import-export/#import-data-into-a-collection)
 
-### **Exercise 10**: Create an Atlas Search Index
+### **Exercise 10**: Create an Atlas Search Index and Search
 #### Explanation and How-to
 [Atlas Search](https://www.mongodb.com/docs/atlas/atlas-search/) is an embedded full-text search capability in MongoDB Atlas that gives you a seamless, scalable experience for building relevance-based app features. Built on Apache Lucene, Atlas Search eliminates the need to run a separate search system alongside your database.
 

@@ -145,3 +145,23 @@ BONUS: You can use Compass to craft aggregations and then [export them to either
 
 Once done, you should see 5,000 documents in the `wikipedia` collection with a schema like this:
 ![screenshot of compass gui showing what a handful of documents look like from the wikipedia_tiny.json file](https://github.com/nickgogan/MongoDBAtlasDeveloperDay/blob/main/compass%20and%20shell/images/Compass_WikpediaSchema.png)
+
+## **Exercise 10**: Create Atlas Search Index and Search
+
+## **Exercise 11**: Create an *Optimized* Atlas Search Index
+Please follow the instructions below to create a new search, optimized search index:
+1. In the **Atlas UI**, go to the **Search** page. There is a link called `Search` on the left-hand panel.
+2. Select your cluster and hit the `Go to Atlas Search` button. You should see the search index you previously made here. 
+3. Hit the `CREATE INDEX` button in the upper-right-hand side. 
+4. Keep `Visual Editor` selected and hit the `Next` button.
+5. Set the index name to `optimized` and select the `wikipedia` collection in the `devday` database. Hit `Next`.
+6. Click `Refine Your Index`.
+7. At the top of the page, for the `Index Analyzer` dropdown, select `lucene.english`.
+8. Disable `Dynamic Mapping`. We will specific the fields we want to index this time.
+9. Click `Add Field Mapping`. Enter `title` for the first field name and keep everything else the same. Hit `Add`.
+10. Repeat step 9 for the `text` field.
+11. Scroll down and hit `Save Changes`.
+12. Hit `Create Search Index` to create your new `optimized` index.
+
+## **Exercise 12**: 
+
