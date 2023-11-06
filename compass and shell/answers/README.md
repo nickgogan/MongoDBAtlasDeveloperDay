@@ -147,6 +147,66 @@ Once done, you should see 5,000 documents in the `wikipedia` collection with a s
 ![screenshot of compass gui showing what a handful of documents look like from the wikipedia_tiny.json file](https://github.com/nickgogan/MongoDBAtlasDeveloperDay/blob/main/compass%20and%20shell/images/Compass_WikpediaSchema.png)
 
 ## **Exercise 10**: Create Atlas Search Index and Search
+First, create a default Atlas Search index by following along the gif below:
+![gif of how to create a fulltext search index via the atlas web ui.](https://github.com/nickgogan/MongoDBAtlasDeveloperDay/blob/main/compass%20and%20shell/images/Atlas_CreateSearchIndex.gif)
+
+It should take only a couple of minutes for this index to be created and reach `ACTIVE` status, meaning that it is searchable. Once ready, try running some `$search` queries.
+### Shell
+[Fuzzy search example](https://www.mongodb.com/docs/atlas/atlas-search/text/)
+```
+let search = {$search: {
+  index: 'default',
+  text: {
+	query: ‘<user input>’,
+	path: 'fullplot',
+	fuzzy: {
+  	  maxEdits: 2,
+  	  prefixLength: 0
+	}
+  }
+}}
+```
+```
+db.wikipedia.aggregate([search])
+```
+You can see project in the revelancy scores and/or highlights using `$project` like so:
+```
+let projection = {$project
+  title: 1,
+  text: 1,
+  score: {
+    $meta: "searchScore",
+  },
+  highlights: {
+    $meta: "searchHighlights",
+  }}
+```
+```
+db.wikipedia.aggregate([search, projection])
+```
+This projection can be used with the examples below too.
+[Highlighting example](https://www.mongodb.com/docs/atlas/atlas-search/highlighting/)
+```
+let search = {$search: {
+  index: 'default',
+  text: {
+	query: ‘<user input>’,
+	path: 'fullplot',
+	fuzzy: {
+  	  maxEdits: 2,
+  	  prefixLength: 0
+	}
+  },
+  highlight: {
+	path: "fullplot"
+  }
+}}
+```
+```
+db.wikipedia.aggregate([search, projection])
+```
+[Compound example](https://www.mongodb.com/docs/atlas/atlas-search/compound/#definition)
+### Compass
 
 ## **Exercise 11**: Create an *Optimized* Atlas Search Index
 Please follow the instructions below to create a new search, optimized search index:
