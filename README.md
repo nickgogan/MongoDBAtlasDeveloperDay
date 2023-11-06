@@ -14,16 +14,14 @@ The exercises cover (via different content delivery mechanisms like [MongoDB Com
 - [Semantic search](https://www.mongodb.com/products/platform/atlas-vector-search) using the vectorized wikipedia dataset (same one)
 
 ## Table of Contents
-- [Example Agenda]()
-- **Preparation**
-  - [Prerequisites](#attendee-prerequisites)
-  - [Workshop Facilitator Checklist](#workshop-facilitator-prerequisites)
+- [MongoDB Atlas Developer Day Workshop](#mongodb-atlas-developer-day-workshop)
+  - [Table of Contents](#table-of-contents)
+  - [Sample Agenda](#sample-agenda)
+    - [Full Day](#full-day)
+    - [Half Day](#half-day)
+  - [Attendee Prerequisites](#attendee-prerequisites)
+  - [Workshop Facilitator Prerequisites](#workshop-facilitator-prerequisites)
   - [Troubleshooting Common Issues](#troubleshooting-common-issues)
-- **Execution**: Choose one of the following approaches to the exercises
-  - [MongoDB Compass](https://github.com/nickgogan/MongoDBAtlasDeveloperDay/tree/main/compass)
-  - [Jupyter](https://github.com/nickgogan/MongoDBAtlasDeveloperDay/tree/main/jupyter)
-- **Optional**
-  - [Get your own clean wikipedia dataset](https://github.com/nickgogan/MongoDBAtlasDeveloperDay/tree/main/data)
 
 ## Sample Agenda
 ### Full Day
