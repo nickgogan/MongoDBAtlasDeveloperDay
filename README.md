@@ -14,6 +14,7 @@ The exercises cover (via different content delivery mechanisms like [MongoDB Com
 - [Semantic search](https://www.mongodb.com/products/platform/atlas-vector-search) using the vectorized wikipedia dataset (same one)
 
 ## Table of Contents
+- [Example Agenda]()
 - **Preparation**
   - [Prerequisites](#attendee-prerequisites)
   - [Workshop Facilitator Checklist](#workshop-facilitator-prerequisites)
@@ -23,6 +24,39 @@ The exercises cover (via different content delivery mechanisms like [MongoDB Com
   - [Jupyter](https://github.com/nickgogan/MongoDBAtlasDeveloperDay/tree/main/jupyter)
 - **Optional**
   - [Get your own clean wikipedia dataset](https://github.com/nickgogan/MongoDBAtlasDeveloperDay/tree/main/data)
+
+## Sample Agenda
+### Full Day
+* 9:30 - 10:00 am: Arrivals and Breakfast (courtesy by MongoDB)
+
+* 10:00 - 10:15 am: Welcome Remarks and Developer Day Kick Off
+
+* 10:15 - 11:00 am: MongoDB Developer Data Platform Overview with MongoDB Solution Architects
+
+* 11:00 - 12:30 pm: (Workshop) MongoDB Data Model and Query Fundamentals
+
+* 12:30 - 1:30 pm: Lunch Break (courtesy of MongoDB)
+
+* 1:30 - 3:00 pm: (Workshop) MongoDB Atlas Search and Vector Search
+
+* 3:00 - 3:45 pm: Wrap up (Q/A, Use Case Discussions, etc.)
+
+* 3:45 - 5:00 pm: Executive Engagement, Vision, and Roadmap with MongoDB Product Executive(s)
+
+* 5:00 pm: Happy Hour! (courtesy of MongoDB)
+
+### Half Day
+>It's recommended that the audience had an initial MongoDB 101 presentation to be ready to do the Developer Day exercises. 
+
+* 9:30 - 10:00 am: Arrivals and Breakfast (courtesy by MongoDB)
+
+* 10:00 - 10:15 am: Welcome Remarks and Developer Day Kick Off
+
+* 10:15 - 12:00 pm: (Workshop) MongoDB Data Model and Query Fundamentals
+
+* 12:00 - 12:30 pm: Lunch Break (courtesy of MongoDB)
+
+* 1:00 - 2:00 pm: (Workshop) MongoDB Atlas Search and Vector Search
 
 ## Attendee Prerequisites
 
